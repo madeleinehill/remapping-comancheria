@@ -8,11 +8,11 @@ jobs:
       - checkout
       - run: npm install
       - run:
-        name: "build react app"
-        command: |
-          npm run build
-        environment:
-          CI: ""
+          name: "build react app"
+          command: |
+            npm run build
+          environment:
+            CI: ""
 
       - add_ssh_keys:
           fingerprints:
