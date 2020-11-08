@@ -8,19 +8,19 @@ jobs:
       - checkout
       - run: npm install
       - run:
-        name: "build react app"
-        command: |
-          npm run build
+          name: "build react app"
+          command: |
+            npm run build
       - env:
         CI: ""
 
       - add_ssh_keys:
-        fingerprints:
-          - "ad:7c:65:60:4d:56:6a:4b:c9:ad:f3:d0:d1:a9:55:88"
+          fingerprints:
+            - "ad:7c:65:60:4d:56:6a:4b:c9:ad:f3:d0:d1:a9:55:88"
       - run:
-        name: Deploy Over SSH
-        command: |
-          scp -r -o StrictHostKeyChecking=no ~/project/build/* $SSH_USER@$SSH_TARGET
+          name: Deploy Over SSH
+          command: |
+            scp -r -o StrictHostKeyChecking=no ~/project/build/* $SSH_USER@$SSH_TARGET
 
 workflows:
   version: 2
