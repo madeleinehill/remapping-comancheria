@@ -1,13 +1,18 @@
 import React from "react";
-import { Map, TileLayer, Popup, Circle } from "react-leaflet";
+import {
+  Map,
+  TileLayer,
+  Popup,
+  Circle,
+  ZoomControl,
+  Polygon,
+} from "react-leaflet";
 import { connect } from "react-redux";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import CustomPopup from "./CustomPopup";
-import { getFilteredMentions } from "../modules/selectors";
 
 import { createUseStyles } from "react-jss";
-import geoData from "../utils/geo_data";
 
 // necessary to allow for correct loading of marker icon
 delete L.Icon.Default.prototype._getIconUrl;
@@ -30,15 +35,14 @@ const MapWrapper = (props) => {
   console.log(props.totalMentions);
   const classes = useStyles(props);
 
-  const calulateSize = (count) => {
-    return props.relativeSizing
-      ? 500000 * Math.sqrt(count / props.totalMentions)
-      : 10000 * Math.sqrt(count);
-  };
-
   return (
     <>
-      <Map className={classes.map} center={[35, -100]} zoom={5}>
+      <Map
+        className={classes.map}
+        center={[35, -100]}
+        zoom={5}
+        zoomControl={false}
+      >
         {props.children}
         <TileLayer
           url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}"
@@ -46,48 +50,36 @@ const MapWrapper = (props) => {
           minZoom={2}
           maxZoom={10}
         />
-        {Object.keys(props.mentions).map((obs, i) => {
+        <Polygon
+          positions={[
+            [37, -109.05],
+            [43, -109.03],
+            [41, -102.05],
+            [37, -102.04],
+          ]}
+          color={"red"}
+        ></Polygon>
+        {/* {Object.keys(props.mentions).map((obs, i) => {
           return (
-            <Circle
-              key={obs}
-              center={[geoData[obs]["latitude"], geoData[obs]["longitude"]]}
-              radius={
-                props.scaleMarkers * calulateSize(props.mentions[obs].count)
-              }
-              color={
-                geoData[obs].type === "state" || geoData[obs].type === "country"
-                  ? "#F57"
-                  : "#57F"
-              }
-            >
+            <Circle>
               <Popup>
                 <CustomPopup
                   data={{
                     mentions: props.mentions[obs].count,
                     literals: props.mentions[obs].literals,
-                    ...geoData[obs],
                     totalMentions: props.totalMentions,
                   }}
                 />
               </Popup>
             </Circle>
           );
-        })}
+        })} */}
       </Map>
     </>
   );
 };
 
-const mapStateToProps = (state) => {
-  const { mentions, totalMentions } = getFilteredMentions(state);
-  return {
-    documents: state.documents,
-    mentions: mentions,
-    totalMentions: totalMentions,
-    relativeSizing: state.mapControls.relativeSizing,
-    scaleMarkers: state.mapControls.scaleMarkers,
-  };
-};
+const mapStateToProps = (state) => {};
 
 const mapDispatchToProps = (dispatch) => ({});
 
