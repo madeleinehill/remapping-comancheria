@@ -1,0 +1,44 @@
+{
+  "name": "1. Demo",
+  "content": [
+    {
+      "type": "card",
+      "text": "## Hello! \n Hi Prof. Ostrow and Bella. This is my first stab at implementing the kind of interactive learning platform that I plan to use for my final project/capstone."
+    },
+    {
+      "type": "modal",
+      "text": "## Hello! (cont.) \n As you'll see, there are a number of different ways to display information. These can be used sequentially to construct a lesson with many different components."
+    },
+    {
+      "type": "card",
+      "text": "## Drawing connections \n Because all parts of the app are connected to a central state store, the map can be controlled simply by navigating the arrows. Click the marker to see.",
+      "popups": [
+          {
+          "text": "## Mapping \n We can point out something on the map",
+          "position": [39, -106.55]
+        }
+      ]
+    },
+    {
+      "type": "map",
+      "popups": [
+          {
+          "text": "## Mapping (cont.) \n And even bring in more complex elements on the map to back it up",
+          "position": [39, -106.55]
+        }
+      ],
+      "shapes": [
+        {
+          "type": "polygon",
+          "positions": [
+            [37, -109.05],
+            [43, -109.03],
+            [41, -102.05],
+            [37, -102.04]
+          ]
+        }
+      ]
+    }
+  ]
+}
+
