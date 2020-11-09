@@ -30,7 +30,10 @@ function public_dir(url) {
 
 function* fetchLesson(action) {
   try {
-    const response = yield call(public_dir, `/lessons/${action.value}`);
+    const response = yield call(
+      public_dir,
+      `${process.env.PUBLIC_URL}/lessons/${action.value}`,
+    );
     yield put({
       type: FETCH_LESSON_SUCCEEDED,
       value: { ...response.data, src: action.value },
@@ -42,7 +45,10 @@ function* fetchLesson(action) {
 
 function* fetchAvailableLessons() {
   try {
-    const response = yield call(public_dir, "/available_lessons.json");
+    const response = yield call(
+      public_dir,
+      `${process.env.PUBLIC_URL}/available_lessons.json`,
+    );
     yield put({
       type: FETCH_AVAILABLE_LESSONS_SUCCEEDED,
       value: response.data,

@@ -18,11 +18,11 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 const customMarker = new L.Icon({
-  iconUrl: "/marker-icon-2x.png",
+  iconUrl: `${process.env.PUBLIC_URL}/marker-icon-2x.png`,
   iconRetinaUrl: null,
   iconAnchor: new L.Point(15, 50),
   popupAnchor: new L.Point(0, -50),
-  shadowUrl: "marker-shadow.png",
+  shadowUrl: `${process.env.PUBLIC_URL}/marker-shadow.png`,
   shadowSize: null,
   shadowAnchor: null,
   iconSize: new L.Point(30, 50),
