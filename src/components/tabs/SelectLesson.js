@@ -1,29 +1,63 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import {
-  MenuItem,
   NativeSelect,
   InputLabel,
   FormControl,
+  Button,
 } from "@material-ui/core";
 
+import { FETCH_LESSON } from "../../modules/actions";
+import { SUCCESS } from "../../utils/loadingStatus";
+
 const ConfiguredSidebar = (props) => {
-  const [selectedLesson, setSelectedLesson] = useState(null);
+  const { currentLesson, availableLessons, loadLesson } = props;
+  const currentLessonValue = currentLesson.src;
+
+  const [selectedLesson, setSelectedLesson] = useState(currentLessonValue);
+
+  const handleSubmit = (lessonSrc) => {
+    loadLesson(lessonSrc);
+    props.handleClose();
+  };
 
   return (
     <div style={{ minWidth: "200px" }}>
+      <h2>Current lesson:</h2>
+      <p>{currentLesson.name ? currentLesson.name : "No lesson selected"}</p>
       <FormControl style={{ minWidth: "200px" }}>
         <InputLabel id="lesson-select-label">Select a lesson:</InputLabel>
         <NativeSelect
           labelId="lesson-select-label"
           id="lesson-select"
           value={selectedLesson}
-          onChange={setSelectedLesson}
+          onChange={(e) => setSelectedLesson(e.target.value)}
         >
-          <option value={1}>Mapping Comanchería</option>
+          {availableLessons.loadingStatus === SUCCESS && [
+            <option value={""}>{""}</option>,
+            ...availableLessons.lessons.map((l) => (
+              <option value={l.src}>{l.name}</option>
+            )),
+          ]}
         </NativeSelect>
+        <Button
+          onClick={() => handleSubmit(selectedLesson)}
+          disabled={!selectedLesson || selectedLesson === currentLessonValue}
+        >
+          Load Lesson
+        </Button>
       </FormControl>
     </div>
   );
 };
 
-export default ConfiguredSidebar;
+const mapStateToProps = (state) => ({
+  currentLesson: state.currentLesson,
+  availableLessons: state.availableLessons,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadLesson: (src) => dispatch({ type: FETCH_LESSON, value: src }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfiguredSidebar);

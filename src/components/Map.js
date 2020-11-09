@@ -1,27 +1,13 @@
 import React from "react";
-import {
-  Map,
-  TileLayer,
-  Popup,
-  Circle,
-  ZoomControl,
-  Polygon,
-} from "react-leaflet";
+import { Map, TileLayer, Popup, Marker, Polygon } from "react-leaflet";
 import { connect } from "react-redux";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import CustomPopup from "./CustomPopup";
+
+import { SUCCESS } from "../utils/loadingStatus";
 
 import { createUseStyles } from "react-jss";
-
-// necessary to allow for correct loading of marker icon
-delete L.Icon.Default.prototype._getIconUrl;
-
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-  iconUrl: require("leaflet/dist/images/marker-icon.png"),
-  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
-});
+import ReactMarkdown from "react-markdown";
 
 const useStyles = createUseStyles((theme) => ({
   map: {
@@ -31,9 +17,30 @@ const useStyles = createUseStyles((theme) => ({
   },
 }));
 
+const customMarker = new L.Icon({
+  iconUrl: "/marker-icon-2x.png",
+  iconRetinaUrl: null,
+  iconAnchor: new L.Point(15, 50),
+  popupAnchor: new L.Point(0, -50),
+  shadowUrl: "marker-shadow.png",
+  shadowSize: null,
+  shadowAnchor: null,
+  iconSize: new L.Point(30, 50),
+});
+
 const MapWrapper = (props) => {
-  console.log(props.totalMentions);
   const classes = useStyles(props);
+  const { currentLesson } = props;
+
+  const currentContent =
+    currentLesson.loadingStatus === SUCCESS
+      ? currentLesson.content[currentLesson.currentIndex]
+      : {};
+
+  const popups = !!currentContent.popups ? currentContent.popups : [];
+  const shapes = !!currentContent.shapes ? currentContent.shapes : [];
+
+  const polygons = shapes.filter((s) => s.type === "polygon");
 
   return (
     <>
@@ -50,36 +57,26 @@ const MapWrapper = (props) => {
           minZoom={2}
           maxZoom={10}
         />
-        <Polygon
-          positions={[
-            [37, -109.05],
-            [43, -109.03],
-            [41, -102.05],
-            [37, -102.04],
-          ]}
-          color={"red"}
-        ></Polygon>
-        {/* {Object.keys(props.mentions).map((obs, i) => {
-          return (
-            <Circle>
-              <Popup>
-                <CustomPopup
-                  data={{
-                    mentions: props.mentions[obs].count,
-                    literals: props.mentions[obs].literals,
-                    totalMentions: props.totalMentions,
-                  }}
-                />
-              </Popup>
-            </Circle>
-          );
-        })} */}
+        {polygons.map((p, i) => (
+          <Polygon
+            key={i}
+            positions={p.positions}
+            color={p.color ? p.color : "red"}
+          ></Polygon>
+        ))}
+        {popups.map((p, i) => (
+          <Marker position={p.position} icon={customMarker}>
+            <Popup key={i} color={p.color ? p.color : "red"}>
+              <ReactMarkdown>{p.text}</ReactMarkdown>
+            </Popup>
+          </Marker>
+        ))}
       </Map>
     </>
   );
 };
 
-const mapStateToProps = (state) => {};
+const mapStateToProps = (state) => ({ currentLesson: state.currentLesson });
 
 const mapDispatchToProps = (dispatch) => ({});
 

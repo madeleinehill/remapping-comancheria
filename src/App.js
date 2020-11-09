@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import { createUseStyles } from "react-jss";
 
-import configureStore from "./modules/store";
+import { store } from "./modules/store";
 import Map from "./components/Map";
 import Sidebar from "./components/Sidebar";
 import MapOverlay from "./components/MapOverlay";
-
-const reduxStore = configureStore();
 
 const useStyles = createUseStyles({
   "@global": {
@@ -59,11 +57,11 @@ const useStyles = createUseStyles({
   },
 });
 
-function App() {
+function App(props) {
   const classes = useStyles();
 
   return (
-    <Provider store={reduxStore}>
+    <Provider store={store}>
       <Sidebar></Sidebar>
       <Map />
       <MapOverlay></MapOverlay>

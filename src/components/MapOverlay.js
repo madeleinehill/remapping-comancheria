@@ -1,7 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createUseStyles } from "react-jss";
+
+import { SUCCESS } from "../utils/loadingStatus";
+import { INCREMENT_INDEX, DECREMENT_INDEX } from "../modules/actions";
+
 import Guide from "./Guide";
+import Modal from "./Modal";
 import LessonTitle from "./LessonTitle";
 
 const useStyles = createUseStyles({
@@ -27,10 +32,10 @@ const useStyles = createUseStyles({
     flex: "0 0 50px",
     padding: "15px",
   },
-  activityDisplay: {
+  modalContainer: {
+    position: "relative",
     display: "flex",
     justifyContent: "center",
-    padding: "15px",
     flex: "1 0 0px",
   },
   guide: {
@@ -39,26 +44,85 @@ const useStyles = createUseStyles({
     flex: "0 0 auto",
     padding: "15px",
   },
+  transluscentBlocker: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    backgroundColor: "#0008",
+    pointerEvents: "auto",
+  },
 });
 
 const MapOverlay = (props) => {
   const classes = useStyles();
 
+  const { currentLesson, incrementIndex, decrementIndex } = props;
+  const { loadingStatus, currentIndex, content, name } = currentLesson;
+
+  if (loadingStatus !== SUCCESS) {
+    return (
+      <div className={classes.container}>
+        <div className={classes.title}>
+          <LessonTitle text="No lesson selected"></LessonTitle>
+        </div>
+        <div className={classes.modalContainer}></div>
+        <div className={classes.guide}>
+          <Guide
+            text={
+              "## No Lesson Selected \n Load a lesson from the sidebar to begin"
+            }
+            navIndex={0}
+            maxIndex={0}
+            incrementIndex={() => {}}
+            decrementIndex={() => {}}
+            hasCard={true}
+          ></Guide>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={classes.container}>
+      {content[currentIndex].type === "modal" && (
+        <div className={classes.transluscentBlocker}></div>
+      )}
       <div className={classes.title}>
-        <LessonTitle text="1: Mapping Comanchería"></LessonTitle>
+        <LessonTitle text={name}></LessonTitle>
       </div>
-      <div className={classes.activityDisplay}></div>
+      <div className={classes.modalContainer}>
+        <Modal
+          text={
+            content[currentIndex].type === "modal"
+              ? content[currentIndex].text
+              : undefined
+          }
+        ></Modal>
+      </div>
       <div className={classes.guide}>
-        <Guide></Guide>
+        <Guide
+          text={
+            content[currentIndex].type === "card"
+              ? content[currentIndex].text
+              : undefined
+          }
+          navIndex={currentIndex + 1}
+          maxIndex={content.length}
+          incrementIndex={incrementIndex}
+          decrementIndex={decrementIndex}
+        ></Guide>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({ currentLesson: state.currentLesson });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  incrementIndex: () => dispatch({ type: INCREMENT_INDEX }),
+  decrementIndex: () => dispatch({ type: DECREMENT_INDEX }),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapOverlay);

@@ -21,7 +21,7 @@ const ConfiguredSidebar = (props) => {
       onClose={toggleOpen}
     >
       <Tab id="home" header="Home" icon="fa fa-home">
-        <SelectLesson></SelectLesson>
+        <SelectLesson handleClose={toggleOpen}></SelectLesson>
       </Tab>
       {/* <Tab id="settings" header="Settings" icon="fa fa-cog" anchor="bottom">
         <p>Settings dialogue.</p>

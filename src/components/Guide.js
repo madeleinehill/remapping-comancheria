@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import ReactMarkdown from "react-markdown";
 import { ArrowLeft, ArrowRight } from "@material-ui/icons";
 import { createUseStyles } from "react-jss";
 const useStyles = createUseStyles({
@@ -47,71 +47,31 @@ const useStyles = createUseStyles({
 
 const Guide = (props) => {
   const classes = useStyles();
-  const { content } = props;
-  const [open, setOpen] = useState(true);
-  const [navIndex, setNavIndex] = useState(0);
+  const { text, navIndex, maxIndex, incrementIndex, decrementIndex } = props;
 
   return (
     <div className={classes.container}>
-      {open && (
+      {!!text && (
         <div className={classes.contentCard}>
-          {content.length ? (
-            <>
-              <h2>{content[navIndex].title}</h2>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: content[navIndex].text,
-                }}
-              ></p>
-            </>
-          ) : (
-            <>
-              <h2>No Lesson Selected</h2>
-              <p>Load a lesson from the sidebar to begin</p>
-            </>
-          )}
+          <ReactMarkdown>{text}</ReactMarkdown>
         </div>
       )}
       <div className={`${classes.contentCard} ${classes.navCard}`}>
         <div className={classes.arrowContainer}>
           <span style={{ margin: "7px", color: "#333" }}>
-            Progress: {navIndex + 1}/{Object.keys(content).length}
+            Progress: {navIndex}/{maxIndex}
           </span>
           <div style={{ flexGrow: 2 }}></div>
-          <button
-            disabled={navIndex <= 0}
-            onClick={() => setNavIndex(navIndex - 1)}
-          >
+          <button disabled={navIndex <= 1} onClick={decrementIndex}>
             <ArrowLeft />
           </button>
-          <button
-            disabled={navIndex >= content.length - 1}
-            onClick={() => setNavIndex(navIndex + 1)}
-          >
+          <button disabled={navIndex >= maxIndex} onClick={incrementIndex}>
             <ArrowRight />
           </button>
         </div>
-      </div>
-      <div
-        style={{ display: "flex", height: "100px", justifyContent: "flex-end" }}
-      >
-        <img
-          alt="toggle guide"
-          src={
-            process.env.PUBLIC_URL +
-            (open ? "/book_open.svg" : "/book_closed.svg")
-          }
-          style={open ? {} : { width: "40px", marginRight: "10px" }}
-          className={classes.toggleIcon}
-          onClick={() => setOpen(!open)}
-        ></img>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({ content: state.content });
-
-const mapDispatchToProps = (dispatch) => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Guide);
+export default Guide;
