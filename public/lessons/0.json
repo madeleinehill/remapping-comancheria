@@ -7,7 +7,7 @@
     },
     {
       "type": "modal",
-      "text": "## Hello! (cont.) \n As you'll see, there are a number of different ways to display information. These can be used sequentially to construct a lesson with many different components."
+      "text": "## Hello! (cont.) \n As you'll see, there are a number of different ways to display information. These can be used sequentially to construct a lesson with many different components. This is super easy to do, because I've been able to store all the info in these nice little .json files that I can edit directly, without going into the source code of the application itself. ![Image of .json file](/scry/json_img.png)"
     },
     {
       "type": "card",
