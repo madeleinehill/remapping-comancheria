@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-import { SUCCESS } from "../utils/loadingStatus";
+import { SUCCESS, config } from "../utils/constants";
 
 import { createUseStyles } from "react-jss";
 import ReactMarkdown from "react-markdown";
@@ -18,11 +18,11 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 const customMarker = new L.Icon({
-  iconUrl: `/scry/marker-icon-2x.png`,
+  iconUrl: `${config.API_URL}/marker-icon-2x.png`,
   iconRetinaUrl: null,
   iconAnchor: new L.Point(15, 50),
   popupAnchor: new L.Point(0, -50),
-  shadowUrl: `/scry/marker-shadow.png`,
+  shadowUrl: `${config.API_URL}/marker-shadow.png`,
   shadowSize: null,
   shadowAnchor: null,
   iconSize: new L.Point(30, 50),
@@ -33,7 +33,8 @@ const MapWrapper = (props) => {
   const { currentLesson } = props;
 
   const currentContent =
-    currentLesson.loadingStatus === SUCCESS
+    currentLesson.loadingStatus === SUCCESS &&
+    currentLesson.content.loadingStatus === SUCCESS
       ? currentLesson.content[currentLesson.currentIndex]
       : {};
 

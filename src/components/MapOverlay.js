@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { createUseStyles } from "react-jss";
 
-import { SUCCESS } from "../utils/loadingStatus";
+import { SUCCESS } from "../utils/constants";
 import { INCREMENT_INDEX, DECREMENT_INDEX } from "../modules/actions";
 
 import Guide from "./Guide";
@@ -61,6 +61,24 @@ const MapOverlay = (props) => {
   const { currentLesson, incrementIndex, decrementIndex } = props;
   const { loadingStatus, currentIndex, content, name } = currentLesson;
 
+  const modalContent =
+    content[currentIndex] &&
+    content[currentIndex].loadingStatus === SUCCESS &&
+    content[currentIndex].modal
+      ? content[currentIndex].modal.text === "MAIN"
+        ? content[currentIndex].main
+        : content[currentIndex].modal.text
+      : undefined;
+
+  const cardContent =
+    content[currentIndex] &&
+    content[currentIndex].loadingStatus === SUCCESS &&
+    content[currentIndex].card
+      ? content[currentIndex].card.text === "MAIN"
+        ? content[currentIndex].main
+        : content[currentIndex].card.text
+      : undefined;
+
   if (loadingStatus !== SUCCESS) {
     return (
       <div className={classes.container}>
@@ -93,21 +111,11 @@ const MapOverlay = (props) => {
         <LessonTitle text={name}></LessonTitle>
       </div>
       <div className={classes.modalContainer}>
-        <Modal
-          text={
-            content[currentIndex].type === "modal"
-              ? content[currentIndex].text
-              : undefined
-          }
-        ></Modal>
+        <Modal text={modalContent}></Modal>
       </div>
       <div className={classes.guide}>
         <Guide
-          text={
-            content[currentIndex].type === "card"
-              ? content[currentIndex].text
-              : undefined
-          }
+          text={cardContent}
           navIndex={currentIndex + 1}
           maxIndex={content.length}
           incrementIndex={incrementIndex}

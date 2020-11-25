@@ -6,10 +6,12 @@ import {
   FETCH_LESSON_SUCCEEDED,
   FETCH_LESSON_FAILED,
   FETCH_LESSON,
+  FETCH_MAIN_SUCCEEDED,
+  FETCH_MAIN_FAILED,
   INCREMENT_INDEX,
   DECREMENT_INDEX,
 } from "./actions";
-import { SUCCESS, FAILED, NOT_LOADED, LOADING } from "../utils/loadingStatus";
+import { SUCCESS, FAILED, NOT_LOADED, LOADING } from "../utils/constants";
 
 export const defaultState = {
   availableLessons: { loadingStatus: NOT_LOADED, lessons: [] },
@@ -52,7 +54,6 @@ const reducer = (state = defaultState, action) => {
         ...state,
         currentLesson: {
           ...state.currentLesson,
-          loadingStatus: LOADING,
         },
       };
 
@@ -61,7 +62,12 @@ const reducer = (state = defaultState, action) => {
         ...state,
         currentLesson: {
           loadingStatus: SUCCESS,
-          content: action.value.content,
+          content: {
+            ...action.value.content.map((c) => ({
+              ...c,
+              loadingStatus: LOADING,
+            })),
+          },
           name: action.value.name,
           src: action.value.src,
           currentIndex: 0,
@@ -74,6 +80,37 @@ const reducer = (state = defaultState, action) => {
         currentLesson: {
           ...state.currentLesson,
           loadingStatus: FAILED,
+        },
+      };
+
+    case FETCH_MAIN_SUCCEEDED:
+      if (action.value.lessonID !== state.currentLesson.src) {
+        return state;
+      }
+
+      return {
+        ...state,
+        currentLesson: {
+          ...state.currentLesson,
+          content: {
+            ...state.currentLesson.content,
+            [action.value.contentIndex]: {
+              ...state.currentLesson.content[action.value.contentIndex],
+              loadingStatus: SUCCESS,
+              main: action.value.content,
+            },
+          },
+        },
+      };
+
+    case FETCH_MAIN_FAILED:
+      return {
+        ...state,
+        currentLesson: {
+          ...state.currentLesson,
+          [action.value.index]: {
+            content: { loadingStatus: FAILED },
+          },
         },
       };
 

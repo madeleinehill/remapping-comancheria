@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 
 import { FETCH_LESSON } from "../../modules/actions";
-import { SUCCESS } from "../../utils/loadingStatus";
+import { SUCCESS } from "../../utils/constants";
 
 const ConfiguredSidebar = (props) => {
   const { currentLesson, availableLessons, loadLesson } = props;
@@ -16,8 +16,9 @@ const ConfiguredSidebar = (props) => {
 
   const [selectedLesson, setSelectedLesson] = useState(currentLessonValue);
 
-  const handleSubmit = (lessonSrc) => {
-    loadLesson(lessonSrc);
+  const handleSubmit = (id) => {
+    setSelectedLesson(id);
+    loadLesson(id);
     props.handleClose();
   };
 
@@ -31,7 +32,7 @@ const ConfiguredSidebar = (props) => {
           labelId="lesson-select-label"
           id="lesson-select"
           value={selectedLesson}
-          onChange={(e) => setSelectedLesson(e.target.value)}
+          onChange={(e) => handleSubmit(e.target.value)}
         >
           {availableLessons.loadingStatus === SUCCESS && [
             <option value={""}>{""}</option>,
@@ -40,12 +41,6 @@ const ConfiguredSidebar = (props) => {
             )),
           ]}
         </NativeSelect>
-        <Button
-          onClick={() => handleSubmit(selectedLesson)}
-          disabled={!selectedLesson || selectedLesson === currentLessonValue}
-        >
-          Load Lesson
-        </Button>
       </FormControl>
     </div>
   );
