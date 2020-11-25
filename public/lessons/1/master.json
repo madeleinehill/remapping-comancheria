@@ -1,0 +1,60 @@
+{
+    "name": "1. Los Comanches",
+    "content": [
+      {
+        "main_url": "0.md",
+        "modal": {
+          "text": "MAIN"
+        }
+      },
+      {
+        "main_url": "1.md",
+        "card": {"text": "MAIN"}
+      },
+      {
+        "main_url": "2.md",
+        "card": {
+            "text": "MAIN" },
+        "popups": [
+          {
+            "position": [39, -106.55]
+          }
+        ]
+      },
+      {
+        "main_url": "3.md",
+        "modal": {
+          "text":"MAIN"
+        },
+        "popups": [
+          {
+            "text":"MAIN",
+            "position": [39, -106.55]
+          }
+        ],
+        "shapes": [
+          {
+            "type": "polygon",
+            "positions": [
+              [37, -109.05],
+              [43, -109.03],
+              [41, -102.05],
+              [37, -102.04]
+            ]
+          }
+        ]
+      },
+      {
+        "main_url": "4.md",
+        "modal": {
+          "text": "MAIN"
+        }
+      },
+      {
+        "main_url": "5.md",
+        "modal": {
+          "text": "MAIN"
+        }
+      }
+    ]
+  }
