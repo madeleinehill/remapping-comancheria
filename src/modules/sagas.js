@@ -7,23 +7,26 @@ import {
   FETCH_LESSON,
   FETCH_LESSON_SUCCEEDED,
   FETCH_LESSON_FAILED,
-  FETCH_MAIN,
-  FETCH_MAIN_SUCCEEDED,
-  FETCH_MAIN_FAILED,
+  FETCH_RESOURCE,
+  FETCH_RESOURCE_SUCCEEDED,
+  FETCH_RESOURCE_FAILED,
 } from "./actions";
 import { config } from "../utils/constants";
 
-// const fetch = (ms) => new Promise((res) => setTimeout(res, ms));
-
 export function* rootSaga() {
+  yield takeEvery(FETCH_AVAILABLE_LESSONS, fetchAvailableLessons);
   yield takeEvery(FETCH_AVAILABLE_LESSONS, fetchAvailableLessons);
   yield takeLatest(FETCH_LESSON, fetchLesson);
   yield takeLatest(FETCH_LESSON_SUCCEEDED, fetchResources);
-  yield takeEvery(FETCH_MAIN, fetchLessonResource);
+  yield takeEvery(FETCH_RESOURCE, fetchLessonResource);
 }
 
 export function* initializeApplication() {
   yield put({ type: FETCH_AVAILABLE_LESSONS });
+  yield put({
+    type: FETCH_LESSON,
+    value: 1,
+  });
 }
 
 function public_dir(url) {
@@ -38,7 +41,7 @@ function* fetchLessonResource(action) {
   try {
     const response = yield call(public_dir, action.value.path);
     yield put({
-      type: FETCH_MAIN_SUCCEEDED,
+      type: FETCH_RESOURCE_SUCCEEDED,
       value: {
         lessonID: action.value.lessonID,
         contentIndex: action.value.contentIndex,
@@ -46,7 +49,7 @@ function* fetchLessonResource(action) {
       },
     });
   } catch (e) {
-    yield put({ type: FETCH_MAIN_FAILED, message: e.message });
+    yield put({ type: FETCH_RESOURCE_FAILED, message: e.message });
   }
 }
 
@@ -68,7 +71,7 @@ function* fetchLesson(action) {
 function* fetchResources(action) {
   for (const c in action.value.content) {
     yield put({
-      type: FETCH_MAIN,
+      type: FETCH_RESOURCE,
       value: {
         lessonID: action.value.src,
         contentIndex: c,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ReactMarkdown from "react-markdown";
 import { ArrowLeft, ArrowRight } from "@material-ui/icons";
 import { createUseStyles } from "react-jss";
+import MdParser from "../utils/MdParser";
 const useStyles = createUseStyles({
   container: {
     maxWidth: "400px",
@@ -53,14 +53,14 @@ const Guide = (props) => {
     <div className={classes.container}>
       {!!text && (
         <div className={classes.contentCard}>
-          <ReactMarkdown>{text}</ReactMarkdown>
+          <MdParser>{text}</MdParser>
         </div>
       )}
       <div className={`${classes.contentCard} ${classes.navCard}`}>
         <div className={classes.arrowContainer}>
-          <span style={{ margin: "7px", color: "#333" }}>
+          <p style={{ margin: "7px", color: "#333" }}>
             Progress: {navIndex}/{maxIndex}
-          </span>
+          </p>
           <div style={{ flexGrow: 2 }}></div>
           <button disabled={navIndex <= 1} onClick={decrementIndex}>
             <ArrowLeft />

@@ -1,13 +1,22 @@
 import React from "react";
-import { Map, TileLayer, Popup, Marker, Polygon } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Popup,
+  Marker,
+  Polygon,
+  ImageOverlay,
+} from "react-leaflet";
 import { connect } from "react-redux";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import FuzzyLayer from "../utils/FuzzyLayer";
 
 import { SUCCESS, config } from "../utils/constants";
 
 import { createUseStyles } from "react-jss";
-import ReactMarkdown from "react-markdown";
+// import ReactMarkdown from "react-markdown";
+import MdParser from "../utils/MdParser";
 
 const useStyles = createUseStyles((theme) => ({
   map: {
@@ -18,11 +27,11 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 const customMarker = new L.Icon({
-  iconUrl: `${config.API_URL}/marker-icon-2x.png`,
+  iconUrl: `${process.env.PUBLIC_URL}/marker-icon-2x.png`,
   iconRetinaUrl: null,
   iconAnchor: new L.Point(15, 50),
   popupAnchor: new L.Point(0, -50),
-  shadowUrl: `${config.API_URL}/marker-shadow.png`,
+  shadowUrl: `${process.env.PUBLIC_URL}/marker-shadow.png`,
   shadowSize: null,
   shadowAnchor: null,
   iconSize: new L.Point(30, 50),
@@ -34,18 +43,35 @@ const MapWrapper = (props) => {
 
   const currentContent =
     currentLesson.loadingStatus === SUCCESS &&
-    currentLesson.content.loadingStatus === SUCCESS
+    currentLesson.content[currentLesson.currentIndex].loadingStatus === SUCCESS
       ? currentLesson.content[currentLesson.currentIndex]
       : {};
 
   const popups = !!currentContent.popups ? currentContent.popups : [];
   const shapes = !!currentContent.shapes ? currentContent.shapes : [];
+  const features = !!currentContent.geodata ? currentContent.geodata : [];
 
   const polygons = shapes.filter((s) => s.type === "polygon");
 
+  const data = features.map((feature) => {
+    if (
+      !feature.geometry ||
+      !feature.geometry.type ||
+      feature.geometry.type !== "Polygon"
+    ) {
+      return undefined;
+    }
+    return {
+      positions: feature.geometry.coordinates.map((cgroup) =>
+        cgroup.map((c) => ({ lat: c[1], lng: c[0] })),
+      ),
+      properties: feature.properties,
+    };
+  });
+
   return (
     <>
-      <Map
+      <MapContainer
         className={classes.map}
         center={[35, -100]}
         zoom={5}
@@ -58,6 +84,13 @@ const MapWrapper = (props) => {
           minZoom={2}
           maxZoom={10}
         />
+        {
+          <ImageOverlay
+            url={`${process.env.PUBLIC_URL}/overlay.png`}
+            bounds={[new L.latLng(60, -135), new L.latLng(-18, -30)]}
+            opacity={0.5}
+          />
+        }
         {polygons.map((p, i) => (
           <Polygon
             key={i}
@@ -65,14 +98,15 @@ const MapWrapper = (props) => {
             color={p.color ? p.color : "red"}
           ></Polygon>
         ))}
+        {<FuzzyLayer data={data}></FuzzyLayer>}
         {popups.map((p, i) => (
           <Marker position={p.position} icon={customMarker}>
             <Popup key={i} color={p.color ? p.color : "red"}>
-              <ReactMarkdown>{p.text}</ReactMarkdown>
+              <MdParser>{p.text}</MdParser>
             </Popup>
           </Marker>
         ))}
-      </Map>
+      </MapContainer>
     </>
   );
 };

@@ -1,14 +1,22 @@
 {"availableLessons": [
     {
-        "name": "1. Los Comanches",
+        "name": "Introduction",
         "src": "1"
     },
     {
-        "name": "2. Mapping and European Representation",
+        "name": "The \"Frontier\"",
         "src": "2"
     },
     {
-        "name": "3. Remapping - the shape of Comanche society",
+        "name": "Los Comanches",
         "src": "3"
+    },
+    {
+        "name": "Remapping",
+        "src": "4"
+    },
+    {
+        "name": "Conclusion",
+        "src": "5"
     }
 ]}

@@ -46,14 +46,16 @@ const useStyles = createUseStyles({
       fontSize: "12px",
       fontFamily: "Roboto",
     },
-    span: {
-      fontSize: "14px",
-      fontFamily: "Red Hat Text",
-    },
     button: {
       fontSize: "14px",
       fontFamily: "Roboto",
     },
+  },
+  splitVertical: {
+    display: "flex",
+    width: "100vw",
+    height: "100vh",
+    position: "relative",
   },
 });
 
@@ -62,9 +64,13 @@ function App(props) {
 
   return (
     <Provider store={store}>
-      <Sidebar></Sidebar>
-      <Map />
-      <MapOverlay></MapOverlay>
+      <div className={classes.splitVertical}>
+        <Sidebar></Sidebar>
+        <div style={{ flex: "2 0 0", position: "relative" }}>
+          <Map />
+          <MapOverlay></MapOverlay>
+        </div>
+      </div>
     </Provider>
   );
 }

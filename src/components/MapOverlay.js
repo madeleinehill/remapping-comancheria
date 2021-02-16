@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { createUseStyles } from "react-jss";
 
-import { SUCCESS } from "../utils/constants";
+import { SUCCESS, LOADING, FAILED } from "../utils/constants";
 import { INCREMENT_INDEX, DECREMENT_INDEX } from "../modules/actions";
 
 import Guide from "./Guide";
@@ -15,10 +15,10 @@ const useStyles = createUseStyles({
     flexDirection: "column",
 
     position: "absolute",
-    top: "0px",
-    left: "0px",
-    width: "100vw",
-    height: "100vh",
+    top: "0",
+    left: "0",
+    bottom: "0",
+    right: "0",
     zIndex: "1000",
 
     pointerEvents: "none",
@@ -79,17 +79,38 @@ const MapOverlay = (props) => {
         : content[currentIndex].card.text
       : undefined;
 
-  if (loadingStatus !== SUCCESS) {
+  if (loadingStatus === LOADING) {
     return (
       <div className={classes.container}>
         <div className={classes.title}>
-          <LessonTitle text="No lesson selected"></LessonTitle>
+          <LessonTitle text="Loading Lesson..."></LessonTitle>
+        </div>
+        <div className={classes.modalContainer}></div>
+        <div className={classes.guide}>
+          <Guide
+            text={"## Lesson Loading..."}
+            navIndex={0}
+            maxIndex={0}
+            incrementIndex={() => {}}
+            decrementIndex={() => {}}
+            hasCard={true}
+          ></Guide>
+        </div>
+      </div>
+    );
+  }
+
+  if (loadingStatus === FAILED) {
+    return (
+      <div className={classes.container}>
+        <div className={classes.title}>
+          <LessonTitle text="[Error]"></LessonTitle>
         </div>
         <div className={classes.modalContainer}></div>
         <div className={classes.guide}>
           <Guide
             text={
-              "## No Lesson Selected \n Load a lesson from the sidebar to begin"
+              "## Error \n There was a problem loading the lesson. Try selected another one."
             }
             navIndex={0}
             maxIndex={0}
@@ -117,7 +138,7 @@ const MapOverlay = (props) => {
         <Guide
           text={cardContent}
           navIndex={currentIndex + 1}
-          maxIndex={content.length}
+          maxIndex={Object.keys(content).length}
           incrementIndex={incrementIndex}
           decrementIndex={decrementIndex}
         ></Guide>

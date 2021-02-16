@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { createUseStyles } from "react-jss";
 const useStyles = createUseStyles({
   contentCard: {

@@ -6,10 +6,11 @@ import {
   FETCH_LESSON_SUCCEEDED,
   FETCH_LESSON_FAILED,
   FETCH_LESSON,
-  FETCH_MAIN_SUCCEEDED,
-  FETCH_MAIN_FAILED,
+  FETCH_RESOURCE_SUCCEEDED,
+  FETCH_RESOURCE_FAILED,
   INCREMENT_INDEX,
   DECREMENT_INDEX,
+  SET_INDEX,
 } from "./actions";
 import { SUCCESS, FAILED, NOT_LOADED, LOADING } from "../utils/constants";
 
@@ -53,7 +54,11 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         currentLesson: {
-          ...state.currentLesson,
+          loadingStatus: LOADING,
+          content: {},
+          name: "",
+          src: action.value.src,
+          currentIndex: 0,
         },
       };
 
@@ -83,7 +88,7 @@ const reducer = (state = defaultState, action) => {
         },
       };
 
-    case FETCH_MAIN_SUCCEEDED:
+    case FETCH_RESOURCE_SUCCEEDED:
       if (action.value.lessonID !== state.currentLesson.src) {
         return state;
       }
@@ -103,7 +108,7 @@ const reducer = (state = defaultState, action) => {
         },
       };
 
-    case FETCH_MAIN_FAILED:
+    case FETCH_RESOURCE_FAILED:
       return {
         ...state,
         currentLesson: {
@@ -111,6 +116,15 @@ const reducer = (state = defaultState, action) => {
           [action.value.index]: {
             content: { loadingStatus: FAILED },
           },
+        },
+      };
+
+    case SET_INDEX:
+      return {
+        ...state,
+        currentLesson: {
+          ...state.currentLesson,
+          currentIndex: action.value,
         },
       };
 
