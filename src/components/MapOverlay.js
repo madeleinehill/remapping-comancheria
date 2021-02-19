@@ -2,7 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { createUseStyles } from "react-jss";
 
-import { SUCCESS, LOADING, FAILED } from "../utils/constants";
+import { getModalContent, getCardContent } from "../modules/selectors";
+import { LOADING, FAILED } from "../utils/constants";
 import { INCREMENT_INDEX, DECREMENT_INDEX } from "../modules/actions";
 
 import Guide from "./Guide";
@@ -58,32 +59,20 @@ const useStyles = createUseStyles({
 const MapOverlay = (props) => {
   const classes = useStyles();
 
-  const { currentLesson, incrementIndex, decrementIndex } = props;
+  const {
+    currentLesson,
+    modalContent,
+    cardContent,
+    incrementIndex,
+    decrementIndex,
+  } = props;
   const { loadingStatus, currentIndex, content, name } = currentLesson;
-
-  const modalContent =
-    content[currentIndex] &&
-    content[currentIndex].loadingStatus === SUCCESS &&
-    content[currentIndex].modal
-      ? content[currentIndex].modal.text === "MAIN"
-        ? content[currentIndex].main
-        : content[currentIndex].modal.text
-      : undefined;
-
-  const cardContent =
-    content[currentIndex] &&
-    content[currentIndex].loadingStatus === SUCCESS &&
-    content[currentIndex].card
-      ? content[currentIndex].card.text === "MAIN"
-        ? content[currentIndex].main
-        : content[currentIndex].card.text
-      : undefined;
 
   if (loadingStatus === LOADING) {
     return (
       <div className={classes.container}>
         <div className={classes.title}>
-          <LessonTitle text="Loading Lesson..."></LessonTitle>
+          <LessonTitle text="Lesson Loading..."></LessonTitle>
         </div>
         <div className={classes.modalContainer}></div>
         <div className={classes.guide}>
@@ -110,7 +99,7 @@ const MapOverlay = (props) => {
         <div className={classes.guide}>
           <Guide
             text={
-              "## Error \n There was a problem loading the lesson. Try selected another one."
+              "## Error \n There was a problem loading the lesson. Try selecting another one."
             }
             navIndex={0}
             maxIndex={0}
@@ -125,9 +114,7 @@ const MapOverlay = (props) => {
 
   return (
     <div className={classes.container}>
-      {content[currentIndex].type === "modal" && (
-        <div className={classes.transluscentBlocker}></div>
-      )}
+      {!!modalContent && <div className={classes.transluscentBlocker}></div>}
       <div className={classes.title}>
         <LessonTitle text={name}></LessonTitle>
       </div>
@@ -147,7 +134,16 @@ const MapOverlay = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({ currentLesson: state.currentLesson });
+const mapStateToProps = (state) => {
+  const modalContent = getModalContent(state);
+  const cardContent = getCardContent(state);
+  return {
+    currentLesson: state.currentLesson,
+    resources: state.resources,
+    modalContent: modalContent,
+    cardContent: cardContent,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   incrementIndex: () => dispatch({ type: INCREMENT_INDEX }),

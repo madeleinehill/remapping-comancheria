@@ -6,7 +6,7 @@ import * as PIXI from "pixi.js";
 import "leaflet-pixi-overlay"; // Must be called before the 'leaflet' import
 import L from "leaflet";
 
-import { drawOverlay } from "./utils";
+import { drawOverlay } from "./fuzzyUtils";
 
 function FuzzyPolygon(props) {
   const context = useLeafletContext();

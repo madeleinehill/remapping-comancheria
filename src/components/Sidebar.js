@@ -51,7 +51,7 @@ const ConfiguredSidebar = (props) => {
       id="sidebar"
       open={true}
       selected={selected}
-      onSetOpen={onSetSidebarOpen}
+      // onSetOpen={onSetSidebarOpen}
       className={classes.sidebar}
     >
       <SidebarContent>

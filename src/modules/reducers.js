@@ -6,6 +6,7 @@ import {
   FETCH_LESSON_SUCCEEDED,
   FETCH_LESSON_FAILED,
   FETCH_LESSON,
+  FETCH_RESOURCE,
   FETCH_RESOURCE_SUCCEEDED,
   FETCH_RESOURCE_FAILED,
   INCREMENT_INDEX,
@@ -21,6 +22,9 @@ export const defaultState = {
     currentIndex: 0,
     content: [],
     name: null,
+  },
+  resources: {
+    "http://localhost:3000/lessons/1/0.md": "# Hello! \n testing this out!",
   },
 };
 
@@ -70,7 +74,6 @@ const reducer = (state = defaultState, action) => {
           content: {
             ...action.value.content.map((c) => ({
               ...c,
-              loadingStatus: LOADING,
             })),
           },
           name: action.value.name,
@@ -88,22 +91,26 @@ const reducer = (state = defaultState, action) => {
         },
       };
 
-    case FETCH_RESOURCE_SUCCEEDED:
-      if (action.value.lessonID !== state.currentLesson.src) {
-        return state;
-      }
-
+    case FETCH_RESOURCE:
       return {
         ...state,
-        currentLesson: {
-          ...state.currentLesson,
-          content: {
-            ...state.currentLesson.content,
-            [action.value.contentIndex]: {
-              ...state.currentLesson.content[action.value.contentIndex],
-              loadingStatus: SUCCESS,
-              main: action.value.content,
-            },
+        resources: {
+          ...state.resources,
+          [action.value.src]: {
+            loadingStatus: LOADING,
+          },
+        },
+      };
+
+    case FETCH_RESOURCE_SUCCEEDED:
+      return {
+        ...state,
+        resources: {
+          ...state.resources,
+          [action.value.src]: {
+            loadingStatus: SUCCESS,
+            value: action.value.content,
+            type: action.value.type,
           },
         },
       };
@@ -111,10 +118,10 @@ const reducer = (state = defaultState, action) => {
     case FETCH_RESOURCE_FAILED:
       return {
         ...state,
-        currentLesson: {
-          ...state.currentLesson,
-          [action.value.index]: {
-            content: { loadingStatus: FAILED },
+        resources: {
+          ...state.resources,
+          [action.value.src]: {
+            loadingStatus: FAILED,
           },
         },
       };

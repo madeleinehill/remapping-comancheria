@@ -63,8 +63,9 @@ const useStyles = createUseStyles({
     background: "#666",
     cursor: "pointer",
     "&:hover": {
-      background: "#3047C8",
+      boxShadow: "0px 0px 5px white",
       border: "2px solid #fff",
+      background: "#fff",
     },
   },
   completedCircleWrapper: {
@@ -88,7 +89,7 @@ const ConfiguredSidebar = (props) => {
     loadLesson(id);
     props.handleClose();
   };
-  console.log(Object.keys(currentLesson.content).length);
+
   return (
     <div style={{ minWidth: "200px", padding: "10px" }}>
       <h2>Remapping Comanchería:</h2>
@@ -101,20 +102,22 @@ const ConfiguredSidebar = (props) => {
                 <h2
                   className={`${classes.numLabel} ${classes.selectedLabel}`}
                   value={l.src}
+                  key={i}
                 >
                   <div>{i + 1}</div> {l.name}
                 </h2>
-                {Object.keys(currentLesson.content).map((n, i) => (
+                {Object.keys(currentLesson.content).map((n, j) => (
                   <div
                     className={`${classes.circleWrapper} ${
-                      currentLesson.currentIndex >= i
+                      currentLesson.currentIndex >= j
                         ? classes.completedCircleWrapper
                         : ""
                     }`}
+                    key={`li ${j}`}
                   >
                     <div
                       className={classes.circle}
-                      onClick={() => setIndex(i)}
+                      onClick={() => setIndex(j)}
                     ></div>
                   </div>
                 ))}
@@ -124,6 +127,7 @@ const ConfiguredSidebar = (props) => {
                 className={classes.numLabel}
                 value={l.src}
                 onClick={() => handleSubmit(l.src)}
+                key={i}
               >
                 <div>{i + 1}</div> {l.name}
               </h2>

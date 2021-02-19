@@ -4,15 +4,16 @@ import {
   TileLayer,
   Popup,
   Marker,
-  Polygon,
+  // Polygon,
   ImageOverlay,
 } from "react-leaflet";
 import { connect } from "react-redux";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import FuzzyLayer from "../utils/FuzzyLayer";
+import FuzzyPolygon from "../utils/FuzzyPolygon";
 
-import { SUCCESS, config } from "../utils/constants";
+import { getMapElements } from "../modules/selectors";
 
 import { createUseStyles } from "react-jss";
 // import ReactMarkdown from "react-markdown";
@@ -39,35 +40,7 @@ const customMarker = new L.Icon({
 
 const MapWrapper = (props) => {
   const classes = useStyles(props);
-  const { currentLesson } = props;
-
-  const currentContent =
-    currentLesson.loadingStatus === SUCCESS &&
-    currentLesson.content[currentLesson.currentIndex].loadingStatus === SUCCESS
-      ? currentLesson.content[currentLesson.currentIndex]
-      : {};
-
-  const popups = !!currentContent.popups ? currentContent.popups : [];
-  const shapes = !!currentContent.shapes ? currentContent.shapes : [];
-  const features = !!currentContent.geodata ? currentContent.geodata : [];
-
-  const polygons = shapes.filter((s) => s.type === "polygon");
-
-  const data = features.map((feature) => {
-    if (
-      !feature.geometry ||
-      !feature.geometry.type ||
-      feature.geometry.type !== "Polygon"
-    ) {
-      return undefined;
-    }
-    return {
-      positions: feature.geometry.coordinates.map((cgroup) =>
-        cgroup.map((c) => ({ lat: c[1], lng: c[0] })),
-      ),
-      properties: feature.properties,
-    };
-  });
+  const { popups, overlays, polygons, geojson } = props;
 
   return (
     <>
@@ -85,20 +58,28 @@ const MapWrapper = (props) => {
           maxZoom={10}
         />
         {
-          <ImageOverlay
-            url={`${process.env.PUBLIC_URL}/overlay.png`}
-            bounds={[new L.latLng(60, -135), new L.latLng(-18, -30)]}
-            opacity={0.5}
-          />
+          // <ImageOverlay
+          //   url={`${process.env.PUBLIC_URL}/overlay.png`}
+          //   bounds={[new L.latLng(60, -135), new L.latLng(-18, -30)]}
+          //   opacity={0.5}
+          // />
         }
+        {overlays &&
+          overlays.map((o) => (
+            <TileLayer
+              attribution={`&copy; <a href="${o.attributionUrl}">${o.attributionText}</a> contributors`}
+              url={o.tilesUrl}
+              opacity="0.5"
+            />
+          ))}
         {polygons.map((p, i) => (
-          <Polygon
+          <FuzzyPolygon
             key={i}
             positions={p.positions}
             color={p.color ? p.color : "red"}
-          ></Polygon>
+          ></FuzzyPolygon>
         ))}
-        {<FuzzyLayer data={data}></FuzzyLayer>}
+        {<FuzzyLayer data={geojson}></FuzzyLayer>}
         {popups.map((p, i) => (
           <Marker position={p.position} icon={customMarker}>
             <Popup key={i} color={p.color ? p.color : "red"}>
@@ -111,7 +92,10 @@ const MapWrapper = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({ currentLesson: state.currentLesson });
+const mapStateToProps = (state) => {
+  const { popups, overlays, polygons, geojson } = getMapElements(state);
+  return { popups, overlays, polygons, geojson };
+};
 
 const mapDispatchToProps = (dispatch) => ({});
 
