@@ -11,7 +11,7 @@ import {
   FETCH_RESOURCE_SUCCEEDED,
   FETCH_RESOURCE_FAILED,
 } from "./actions";
-import { SUCCESS, config } from "../utils/constants";
+import { SUCCESS } from "../utils/constants";
 
 export function* rootSaga() {
   yield takeEvery(FETCH_AVAILABLE_LESSONS, fetchAvailableLessons);
@@ -42,7 +42,7 @@ function* fetchAvailableLessons() {
   try {
     const response = yield call(
       public_dir,
-      `${config.API_URL}/lessons/available_lessons.json`,
+      `${process.env.PUBLIC_URL}/lessons/available_lessons.json`,
     );
     yield put({
       type: FETCH_AVAILABLE_LESSONS_SUCCEEDED,
@@ -57,7 +57,7 @@ function* fetchLesson(action) {
   try {
     const response = yield call(
       public_dir,
-      `${config.API_URL}/lessons/${action.value}/master.json`,
+      `${process.env.PUBLIC_URL}/lessons/${action.value}/master.json`,
     );
     yield put({
       type: FETCH_LESSON_SUCCEEDED,
@@ -110,7 +110,7 @@ function* fetchResource(action) {
   // resolve address based on whether relative or absolute
   const resolvedSrc =
     src.substring(0, 2) === "./"
-      ? `${config.API_URL}/${src.substring(2)}`
+      ? `${process.env.PUBLIC_URL}/${src.substring(2)}`
       : src;
 
   // otherwise fetch the resource
