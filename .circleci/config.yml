@@ -10,7 +10,7 @@ jobs:
       - run:
           name: "build react app"
           command: |
-            PUBLIC_URL=https://scrapethepast.com/scry npm run build
+            PUBLIC_URL=https://remappingcomancheria.com npm run build
           environment:
             CI: ""
 
