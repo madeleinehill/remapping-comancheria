@@ -69,7 +69,6 @@ function* fetchLesson(action) {
 }
 
 function* fetchResources(action) {
-  console.log(action);
   // crawl content tree for "src" key, load urls
   yield recursiveFetchResources(action.value.content);
 }
@@ -108,14 +107,14 @@ function* fetchResource(action) {
   }
 
   // resolve address based on whether relative or absolute
-  const resolvedSrc =
-    src.substring(0, 2) === "./"
-      ? `${process.env.PUBLIC_URL}/${src.substring(2)}`
-      : src;
+  // const resolvedSrc =
+  //   src.substring(0, 2) === "./"
+  //     ? `${process.env.PUBLIC_URL}/${src.substring(2)}`
+  //     : src;
 
   // otherwise fetch the resource
   try {
-    const response = yield call(public_dir, resolvedSrc);
+    const response = yield call(public_dir, src);
     yield put({
       type: FETCH_RESOURCE_SUCCEEDED,
       value: {

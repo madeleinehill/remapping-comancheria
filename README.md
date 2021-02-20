@@ -10,10 +10,8 @@ Within the `react` directory, you can find the front-end of the app that runs in
 
 The front-end uses [redux](https://redux.js.org/) and [redux-saga](https://redux-saga.js.org/) for state management and asynchronous updates, respectively. You can find all code associated with global state managament in `react/src/modules`.
 
-Within the `node` directory, you will find the code associated with creating and serving the back-end via a [GraphQL](https://graphql.org/) API supported by a [MySQL](https://www.mysql.com/) database. I will add more information on this as development progresses.
-
 ## Credit and contact
 
-This project was developed by me, Henry Hill, in the course of my Senior Capstone at the Minerva Schools at KGI with the help of my advisor, Dr. Sonja Ostrow.
+This project was developed by me, Madeleine Hill, in the course of my Senior Capstone at the Minerva Schools at KGI with the help of my advisor, Dr. Sonja Ostrow.
 
-If you would like to contribute to this project, have feedback on how I can make it more effective for students and educators, or are interested in using it in your classroom, you can submit a pull request or e-mail me at henry.hill@minerva.kgi.edu.
+If you would like to contribute to this project, have feedback on how I can make it more effective for students and educators, or are interested in using it in your classroom, you can submit a pull request or e-mail me at madeleine.jeanette.hill@gmail.com.

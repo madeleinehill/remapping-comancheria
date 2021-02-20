@@ -29,9 +29,7 @@ export const drawPolygon = ({ shape, project, scale }) => {
     instance.lineStyle(strokeWeight / scale, stroke, strokeOpacity);
   }
 
-  console.log(positions);
   const projectedPolygon = positions.map((coords, index) => {
-    console.log(coords);
     return project(coords);
   });
 
@@ -48,7 +46,6 @@ export const drawPolygon = ({ shape, project, scale }) => {
 };
 
 export const drawOverlay = ({ shapes, utils }) => {
-  console.log("drawing", shapes);
   const map = utils.getMap();
 
   if (!map) {
@@ -59,7 +56,7 @@ export const drawOverlay = ({ shapes, utils }) => {
   const renderer = utils.getRenderer();
   const project = utils.latLngToLayerPoint;
   const scale = utils.getScale();
-  console.log(shapes);
+
   shapes.forEach((shape) => {
     drawPolygon({ shape, project, scale });
   });
@@ -70,24 +67,28 @@ export const drawOverlay = ({ shapes, utils }) => {
 // takes any geojson and returns all embedded polygons as array
 export const parseGeojson = (geo, properties = {}) => {
   if (geo.type === "FeatureCollection") {
-    return [].concat(geo.features.map((f) => parseGeojson(f)));
+    return geo.features.map((f) => parseGeojson(f)).flat();
   }
   if (geo.type === "Feature") {
     return parseGeojson(geo.geometry, geo.properties);
   }
+  // not tested
   if (geo.type === "GeometryCollection") {
-    return [].concat(geo.geometries.map((f) => parseGeojson(f, properties)));
+    return geo.geometries.map((f) => parseGeojson(f, properties)).flat();
   }
+  // not tested
   if (geo.type === "MultiPolygon") {
-    return geo.coordinates.map((f) =>
-      parseGeojson({ type: "Polygon", coordinates: f }, properties),
+    geo.coordinates.map((f) =>
+      parseGeojson({ type: "Polygon", coordinates: f }, properties).flat(),
     );
   }
   if (geo.type === "Polygon") {
-    console.log(geo);
-    return {
-      positions: geo.coordinates[0].map((c) => ({ lat: c[1], lng: c[0] })),
-      properties: properties,
-    };
+    return [
+      {
+        positions: geo.coordinates[0].map((c) => ({ lat: c[1], lng: c[0] })),
+        properties: properties,
+      },
+    ];
   }
+  return [];
 };

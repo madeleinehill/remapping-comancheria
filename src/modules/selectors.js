@@ -56,21 +56,56 @@ export const getMapElements = createSelector(
     const currentContent =
       loadingStatus === SUCCESS ? content[currentIndex] : {};
 
-    const popups = !!currentContent.popups ? currentContent.popups : [];
     // popup text from src
+    const popups = resolvePopupContent(currentLesson, resources);
+
+    // resolve geojson from src
+    const geojson = resolveGeojsonContent(currentLesson, resources);
+
     const shapes = !!currentContent.shapes ? currentContent.shapes : [];
-    const geojson = !!currentContent.geojson ? currentContent.geojson : {};
     const overlays = !!currentContent.overlays ? currentContent.overlays : [];
 
-    const polygons = shapes.filter((s) => s.type === "polygon");
+    const polygons = shapes.filter((s) => s.type === "Polygon");
 
-    const geojsonResolved = !!geojson.src
-      ? !!resources[geojson.src] &&
-        resources[geojson.src].loadingStatus === SUCCESS
-        ? resources[geojson.src].value
-        : {}
-      : geojson.data;
-
-    return { popups, overlays, polygons, geojson: geojsonResolved };
+    return { popups, overlays, polygons, geojson };
   },
 );
+
+const resolveGeojsonContent = (currentLesson, resources) => {
+  const { currentIndex, content } = currentLesson;
+
+  if (!content[currentIndex] || !content[currentIndex].geojson) {
+    return {};
+  }
+
+  const { geojson } = content[currentIndex];
+
+  return !!geojson.src
+    ? !!resources[geojson.src] &&
+      resources[geojson.src].loadingStatus === SUCCESS
+      ? resources[geojson.src].value
+      : {}
+    : geojson;
+};
+
+const resolvePopupContent = (currentLesson, resources) => {
+  const { currentIndex, content } = currentLesson;
+
+  if (!content[currentIndex] || !content[currentIndex].popups) {
+    return [];
+  }
+
+  const { popups } = content[currentIndex];
+
+  return popups.map((popup) => {
+    let text = popup.text;
+    if (!!popup.src) {
+      text =
+        !!resources[popup.src] && resources[popup.src].loadingStatus === SUCCESS
+          ? resources[popup.src].value
+          : "loading...";
+    }
+
+    return { ...popup, text: text };
+  });
+};
