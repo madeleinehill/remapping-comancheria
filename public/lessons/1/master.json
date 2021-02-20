@@ -8,12 +8,12 @@
       },
       {
         "card": {
-          "text": "Placing Taos on a rough historical map of the Southwest, it’s easy to see why Taos gained such attention across societies and cultures."
+          "src": "./lessons/1/1.md"
         },
         "popups": [
           {
-            "position": [36, -105],
-            "src": "./lessons/1/1.md"
+            "position": [36, -100],
+            "text": "## Comanchería \n The basic territory inhabited and controlled by the Comanche peoples."
           }
         ],
         "overlays": [
@@ -24,37 +24,33 @@
           }
         ],
         "geojson": {
-          "src": "./resources/sample.geojson"
+          "src": "./resources/cmc_basic.geojson"
+        }
+      },
+      {
+        "card": {
+          "src": "/lessons/1/2.md"
+        },
+        "popups": [
+          {
+            "position": [36, -100],
+            "text": "## Comanchería \n The basic territory inhabited and controlled by the Comanche peoples."
+          }
+        ],
+        "overlays": [
+          {
+            "attributionUrl": "https://mapwarper.net/maps/43803/",
+            "attributionText": "MapWarper",
+            "tilesUrl": "https://mapwarper.net/maps/tile/43803/{z}/{x}/{y}.png"
+          }
+        ],
+        "geojson": {
+          "src": "./resources/cmc_basic.geojson"
         }
       },
       {
         "modal": {
-            "src": "./lessons/1/2.md" },
-        "popups": [
-          {
-            "position": [36, -105]
-          }
-        ]
-      },
-      {
-        "card": {
           "src":"./lessons/1/3.md"
-        },
-        "popups": [
-          {
-            "position": [39, -106.55]
-          }
-        ],
-        "geojson":  {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [-109.05, 37],
-              [-109.03, 43],
-              [-102.05, 41],
-              [-102.04, 37]
-            ]
-          ]
         }
       },
       {
@@ -65,6 +61,11 @@
       {
         "modal": {
           "src": "./lessons/1/5.md"
+        }
+      },
+      {
+        "modal": {
+          "src": "./lessons/1/6.md"
         }
       }
     ]

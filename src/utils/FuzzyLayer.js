@@ -16,6 +16,8 @@ function FuzzyLayer(props) {
   useEffect(() => {
     const shapeData = !!props.data ? parseGeojson(props.data) : [];
 
+    console.log(shapeData);
+
     const container = context.layerContainer || context.map;
     const shapes = [];
     for (let i = 0; i < shapeData.length; i++) {

@@ -22,6 +22,8 @@ const useStyles = createUseStyles({
     right: "0",
     zIndex: "1000",
 
+    maxHeight: "100vh",
+
     pointerEvents: "none",
     "& > div > div": {
       pointerEvents: "auto",
@@ -34,10 +36,11 @@ const useStyles = createUseStyles({
     padding: "15px",
   },
   modalContainer: {
+    minHeight: 0,
     position: "relative",
     display: "flex",
     justifyContent: "center",
-    flex: "1 0 0px",
+    flex: "1 1 0px",
   },
   guide: {
     display: "flex",

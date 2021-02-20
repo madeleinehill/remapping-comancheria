@@ -5,6 +5,8 @@ const useStyles = createUseStyles({
   contentCard: {
     // position: "absolute",
 
+    position: "static",
+    minWidth: "50%",
     maxWidth: "800px",
 
     display: "flex",
