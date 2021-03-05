@@ -1,31 +1,78 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import jargon from "remark-jargon";
-import "./jargon.css";
+import { connect } from "react-redux";
 import jargonData from "./jargon";
+import { createUseStyles } from "react-jss";
+import { SET_OVERLAY_CONTENT, HIDE_OVERLAY } from "../modules/actions";
 
-const plugins = [
-  [
-    jargon,
-    {
-      jargon: jargonData,
+const useStyles = createUseStyles({
+  jargonTerm: {
+    textDecoration: "underline dotted #228be6",
+    fontStyle: "italic",
+    "&::after": {
+      content: "?",
+      fontWeight: "bold",
+      display: "inline-block",
+      transform: "translate(0, -0.5em)",
+      fontSize: "75%",
+      color: "#228be6",
+      marginLeft: "3px",
     },
-  ],
-];
-
-const renderers = {
-  //   paragraph: (node) => {
-  //     console.log(node);
-  //     return <div></div>;
-  //   },
-};
+    "&:hover": {
+      position: "relative",
+      textDecoration: "none",
+      cursor: "help",
+    },
+  },
+});
 
 const MdParser = (props) => {
+  const classes = useStyles(props);
+
+  const triggerOverlay = (content, event) => {
+    props.setOverlayContent({
+      posX: event.clientX,
+      posY: event.clientY,
+      content: content,
+    });
+  };
+
+  const Jargon = (value) => {
+    const jargonInfo =
+      jargonData[value.node.children[0].value.toLowerCase().replace(/\W/g, "")];
+
+    if (!jargonInfo) {
+      return <em>{value.children}</em>;
+    }
+
+    return (
+      <span
+        className={classes.jargonTerm}
+        onMouseEnter={(e) => triggerOverlay(jargonInfo, e)}
+      >
+        {value.children}
+      </span>
+    );
+  };
+
   return (
-    <ReactMarkdown allowDangerousHtml plugins={plugins} renderers={renderers}>
+    <ReactMarkdown
+      allowDangerousHtml
+      renderers={{ emphasis: props.noJargon ? undefined : Jargon }}
+    >
       {props.children}
     </ReactMarkdown>
   );
 };
 
-export default MdParser;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  setOverlayContent: ({ posX, posY, content }) =>
+    dispatch({ type: SET_OVERLAY_CONTENT, value: { posX, posY, content } }),
+  hideOverlay: () => dispatch({ type: HIDE_OVERLAY }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MdParser);

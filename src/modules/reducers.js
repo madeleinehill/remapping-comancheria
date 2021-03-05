@@ -11,6 +11,9 @@ import {
   FETCH_RESOURCE_FAILED,
   INCREMENT_INDEX,
   DECREMENT_INDEX,
+  SET_OVERLAY_CONTENT,
+  HIDE_OVERLAY,
+  SHOW_OVERLAY,
   SET_INDEX,
 } from "./actions";
 import { SUCCESS, FAILED, NOT_LOADED, LOADING } from "../utils/constants";
@@ -25,6 +28,12 @@ export const defaultState = {
   },
   resources: {
     "http://localhost:3000/lessons/1/0.md": "# Hello! \n testing this out!",
+  },
+  overlay: {
+    show: 0,
+    posX: undefined,
+    posY: undefined,
+    content: undefined,
   },
 };
 
@@ -151,6 +160,21 @@ const reducer = (state = defaultState, action) => {
           ...state.currentLesson,
           currentIndex: state.currentLesson.currentIndex - 1,
         },
+      };
+    case SET_OVERLAY_CONTENT:
+      return {
+        ...state,
+        overlay: { ...action.value, show: true },
+      };
+    case HIDE_OVERLAY:
+      return {
+        ...state,
+        overlay: { ...state.overlay, show: false },
+      };
+    case SHOW_OVERLAY:
+      return {
+        ...state,
+        overlay: { ...state.overlay, show: false },
       };
   }
 };

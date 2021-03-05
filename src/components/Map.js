@@ -64,22 +64,24 @@ const MapWrapper = (props) => {
           //   opacity={0.5}
           // />
         }
-        {overlays &&
-          overlays.map((o) => (
-            <TileLayer
-              attribution={`&copy; <a href="${o.attributionUrl}">${o.attributionText}</a> contributors`}
-              url={o.tilesUrl}
-              opacity="0.5"
-            />
-          ))}
-        {polygons.map((p, i) => (
+        {overlays.map((o) => (
+          <TileLayer
+            attribution={`&copy; <a href="${o.attributionUrl}">${o.attributionText}</a> contributors`}
+            url={o.tilesUrl}
+            opacity="0.5"
+            key={o.url}
+          />
+        ))}
+        {/* {polygons.map((p, i) => (
           <FuzzyPolygon
             key={i}
             positions={p.positions}
             color={p.color ? p.color : "red"}
           ></FuzzyPolygon>
+        ))} */}
+        {geojson.map((f) => (
+          <FuzzyLayer data={f} key={f.url}></FuzzyLayer>
         ))}
-        {<FuzzyLayer data={geojson}></FuzzyLayer>}
         {popups.map((p, i) => (
           <Marker position={p.position} icon={customMarker}>
             <Popup key={i} color={p.color ? p.color : "red"}>

@@ -6,6 +6,7 @@ import { store } from "./modules/store";
 import Map from "./components/Map";
 import Sidebar from "./components/Sidebar";
 import MapOverlay from "./components/MapOverlay";
+import AppOverlay from "./components/AppOverlay";
 
 const useStyles = createUseStyles({
   "@global": {
@@ -71,6 +72,7 @@ function App(props) {
           <MapOverlay></MapOverlay>
         </div>
       </div>
+      <AppOverlay></AppOverlay>
     </Provider>
   );
 }

@@ -27,7 +27,6 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.1.3",
-    "remark-jargon": "^2.12.1",
     "remark-oembed": "^1.2.1",
     "reselect": "^4.0.0"
   },

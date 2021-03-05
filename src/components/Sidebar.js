@@ -47,7 +47,6 @@ const ConfiguredSidebar = (props) => {
 
   return (
     <ProSidebar
-      sidebar={<b>Sidebar content</b>}
       id="sidebar"
       open={true}
       selected={selected}

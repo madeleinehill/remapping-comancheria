@@ -11,15 +11,14 @@ import { drawOverlay, parseGeojson } from "./fuzzyUtils";
 function FuzzyLayer(props) {
   const context = useLeafletContext();
   const elementRef = useRef();
-  const pixiContainer = new PIXI.Container();
 
   useEffect(() => {
     const shapeData = !!props.data ? parseGeojson(props.data) : [];
-
-    console.log(shapeData);
-
     const container = context.layerContainer || context.map;
     const shapes = [];
+
+    const pixiContainer = new PIXI.Container();
+
     for (let i = 0; i < shapeData.length; i++) {
       const shape = new PIXI.Graphics();
       pixiContainer.addChild(shape);
@@ -38,7 +37,7 @@ function FuzzyLayer(props) {
     return () => {
       container.removeLayer(elementRef.current);
     };
-  }, [props.data]);
+  }, [props.data, context.layerContainer, context.map]);
 
   return null;
 }

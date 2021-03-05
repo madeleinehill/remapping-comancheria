@@ -117,16 +117,18 @@ const MapOverlay = (props) => {
 
   return (
     <div className={classes.container}>
-      {!!modalContent && <div className={classes.transluscentBlocker}></div>}
+      {!!modalContent.text && (
+        <div className={classes.transluscentBlocker}></div>
+      )}
       <div className={classes.title}>
         <LessonTitle text={name}></LessonTitle>
       </div>
       <div className={classes.modalContainer}>
-        <Modal text={modalContent}></Modal>
+        <Modal {...modalContent}></Modal>
       </div>
       <div className={classes.guide}>
         <Guide
-          text={cardContent}
+          {...cardContent}
           navIndex={currentIndex + 1}
           maxIndex={Object.keys(content).length}
           incrementIndex={incrementIndex}

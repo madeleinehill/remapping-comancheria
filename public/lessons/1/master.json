@@ -3,12 +3,12 @@
     "content": [
       {
         "modal": {
-          "src": "./lessons/1/0.md"
+          "text": { "src": "./lessons/1/0.md" }
         }
       },
       {
         "card": {
-          "src": "./lessons/1/1.md"
+          "text": {"src": "./lessons/1/1.md"}
         },
         "popups": [
           {
@@ -18,18 +18,24 @@
         ],
         "overlays": [
           {
-            "attributionUrl": "https://mapwarper.net/maps/43803/",
+            "attributionUrl": "https://mapwarper.net/maps/52913/",
             "attributionText": "MapWarper",
-            "tilesUrl": "https://mapwarper.net/maps/tile/43803/{z}/{x}/{y}.png"
+            "tilesUrl": "https://mapwarper.net/maps/tile/52913/{z}/{x}/{y}.png"
           }
         ],
-        "geojson": {
-          "src": "./resources/cmc_basic.geojson"
-        }
+        "geojson": [{
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 200
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        }]
       },
       {
         "card": {
-          "src": "/lessons/1/2.md"
+          "text": {"src": "./lessons/1/2.md"}
         },
         "popups": [
           {
@@ -39,33 +45,36 @@
         ],
         "overlays": [
           {
-            "attributionUrl": "https://mapwarper.net/maps/43803/",
+            "attributionUrl": "https://mapwarper.net/maps/52913/",
             "attributionText": "MapWarper",
-            "tilesUrl": "https://mapwarper.net/maps/tile/43803/{z}/{x}/{y}.png"
+            "tilesUrl": "https://mapwarper.net/maps/tile/52913/{z}/{x}/{y}.png"
           }
         ],
-        "geojson": {
-          "src": "./resources/cmc_basic.geojson"
+        "geojson": [{
+          "type": "FeatureCollection",
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        }]
+      },
+      {
+        "modal": {
+          "text": {"src": "./lessons/1/3.md"}
         }
       },
       {
         "modal": {
-          "src":"./lessons/1/3.md"
+          "text": {"src": "./lessons/1/4.md"}
         }
       },
       {
         "modal": {
-          "src": "./lessons/1/4.md"
+          "text": {"src": "./lessons/1/5.md"}
         }
       },
       {
         "modal": {
-          "src": "./lessons/1/5.md"
-        }
-      },
-      {
-        "modal": {
-          "src": "./lessons/1/6.md"
+          "text": {"src": "./lessons/1/6.md"}
         }
       }
     ]

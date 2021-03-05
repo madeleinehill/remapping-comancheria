@@ -65,28 +65,34 @@ export const drawOverlay = ({ shapes, utils }) => {
 };
 
 // takes any geojson and returns all embedded polygons as array
+
 export const parseGeojson = (geo, properties = {}) => {
   if (geo.type === "FeatureCollection") {
-    return geo.features.map((f) => parseGeojson(f)).flat();
+    return geo.features.map((f) => parseGeojson(f, geo.properties)).flat();
   }
   if (geo.type === "Feature") {
-    return parseGeojson(geo.geometry, geo.properties);
+    return parseGeojson(geo.geometry, { ...properties, ...geo.properties });
   }
   // not tested
   if (geo.type === "GeometryCollection") {
-    return geo.geometries.map((f) => parseGeojson(f, properties)).flat();
+    return geo.geometries
+      .map((f) => parseGeojson(f, { ...properties, ...geo.properties }))
+      .flat();
   }
   // not tested
   if (geo.type === "MultiPolygon") {
     geo.coordinates.map((f) =>
-      parseGeojson({ type: "Polygon", coordinates: f }, properties).flat(),
+      parseGeojson(
+        { type: "Polygon", coordinates: f },
+        { ...properties, ...geo.properties },
+      ).flat(),
     );
   }
   if (geo.type === "Polygon") {
     return [
       {
         positions: geo.coordinates[0].map((c) => ({ lat: c[1], lng: c[0] })),
-        properties: properties,
+        properties: { ...properties, ...geo.properties },
       },
     ];
   }
