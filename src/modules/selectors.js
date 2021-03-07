@@ -8,11 +8,19 @@ export const getModalContent = createSelector(
   [getCurrentLesson, getResources],
   (currentLesson, resources) => {
     const { currentIndex, content } = currentLesson;
+    const currentContent = content[currentIndex];
 
-    if (!content[currentIndex] || !content[currentIndex].modal) {
+    if (
+      !currentContent ||
+      !currentContent.modal ||
+      currentContent.loadingStatus !== SUCCESS ||
+      !dependenciesLoaded(currentContent, resources)
+    ) {
       return {};
     }
 
+    console.log(currentContent, resources);
+    console.log("resolving modal resources");
     return resolveResources(content[currentIndex].modal, resources);
   },
 );
@@ -20,12 +28,20 @@ export const getModalContent = createSelector(
 export const getCardContent = createSelector(
   [getCurrentLesson, getResources],
   (currentLesson, resources) => {
-    const { currentIndex, content } = currentLesson;
+    const { currentIndex, content, loadingStatus } = currentLesson;
+    const currentContent = content[currentIndex];
 
-    if (!content[currentIndex] || !content[currentIndex].card) {
-      return {};
+    if (
+      !currentContent ||
+      currentContent.loadingStatus !== SUCCESS ||
+      !dependenciesLoaded(currentContent, resources)
+    ) {
+      return { text: "## Loading slide..." };
     }
 
+    if (!currentContent.card) {
+      return {};
+    }
     return resolveResources(content[currentIndex].card, resources);
   },
 );
@@ -35,9 +51,13 @@ export const getMapElements = createSelector(
   (currentLesson, resources) => {
     const { currentIndex, content, loadingStatus } = currentLesson;
     const currentContent = content[currentIndex];
-    const emptyProps = { popups: [], geojson: [], overlays: [] };
+    const emptyProps = { popups: [], geojson: [], overlays: [], zoomTo: {} };
 
-    if (loadingStatus !== SUCCESS) {
+    if (
+      !currentContent ||
+      currentContent.loadingStatus !== SUCCESS ||
+      !dependenciesLoaded(currentContent, resources)
+    ) {
       return emptyProps;
     }
 
@@ -53,19 +73,18 @@ export const getMapElements = createSelector(
       overlays: currentContent.overlays
         ? resolveResources(currentContent.overlays, resources)
         : [],
+      zoomTo: !!currentContent.zoomTo ? currentContent.zoomTo : {},
     };
   },
 );
 
 function resolveResources(el, resources) {
   // if el is an object, check if there is an src attribute to resolve
+  // this function should not have been called if all dependencies are not loaded
+
+  console.log(el, resources);
   if (typeof el === "object" && el !== null && !!el["src"]) {
-    // if resource has been loaded
-    if (!!resources[el["src"]]) {
-      return resources[el["src"]].value;
-    } else {
-      return undefined;
-    }
+    return resources[el["src"]].value;
   }
 
   // crawl children if el is array or object
@@ -81,4 +100,10 @@ function resolveResources(el, resources) {
   } else {
     return el;
   }
+}
+
+function dependenciesLoaded(currentContent, resources) {
+  return currentContent.dependencies.every(
+    (d) => !!resources[d] && resources[d].loadingStatus === SUCCESS,
+  );
 }

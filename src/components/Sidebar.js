@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-// import { Sidebar, Tab } from "react-leaflet-sidebarv2";
-import {
-  ProSidebar,
-  SidebarHeader,
-  SidebarFooter,
-  SidebarContent,
-} from "react-pro-sidebar";
+import { ProSidebar, SidebarFooter, SidebarContent } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 
 import { createUseStyles } from "react-jss";
-import SelectLesson from "./tabs/SelectLesson";
+import SelectLesson from "./SelectLesson";
 
 const useStyles = createUseStyles((theme) => ({
   sidebar: {

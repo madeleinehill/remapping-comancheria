@@ -39,11 +39,7 @@ const AppOverlay = (props) => {
   }
 
   return (
-    <div
-      className={classes.appOverlay}
-      // onMouseEnter={props.showOverlay}
-      onMouseLeave={props.hideOverlay}
-    >
+    <div className={classes.appOverlay} onMouseLeave={props.hideOverlay}>
       <MdParser noJargon>{overlay.content}</MdParser>
     </div>
   );

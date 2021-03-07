@@ -10,6 +10,8 @@ import {
   FETCH_RESOURCE,
   FETCH_RESOURCE_SUCCEEDED,
   FETCH_RESOURCE_FAILED,
+  SET_SLIDE_DEPENDENCIES,
+  SLIDE_RESOURCES_FAILED,
 } from "./actions";
 import { SUCCESS } from "../utils/constants";
 
@@ -70,10 +72,25 @@ function* fetchLesson(action) {
 
 function* fetchResources(action) {
   // crawl content tree for "src" key, load urls
-  yield recursiveFetchResources(action.value.content);
+  for (const slide in action.value.content) {
+    try {
+      const dependencies = yield recursiveFetchResources(
+        action.value.content[slide],
+      );
+      console.log(slide, dependencies);
+      yield put({
+        type: SET_SLIDE_DEPENDENCIES,
+        value: { slide, dependencies },
+      });
+    } catch (e) {
+      yield put({ type: SLIDE_RESOURCES_FAILED, value: { slide }, message: e });
+    }
+  }
 }
 
 function* recursiveFetchResources(el) {
+  let dependencies = [];
+
   // if el is an object
   if (typeof el === "object" && el !== null) {
     // check if it contains 'src'
@@ -83,15 +100,18 @@ function* recursiveFetchResources(el) {
         type: FETCH_RESOURCE,
         value: { src: el["src"] },
       });
+      dependencies.push(el["src"]);
     }
   }
   // crawl children if el is array or object
   if (Array.isArray(el) || (typeof el === "object" && el !== null)) {
     // crawl elements
     for (const child in el) {
-      yield recursiveFetchResources(el[child]);
+      const childDependencies = yield recursiveFetchResources(el[child]);
+      dependencies = dependencies.concat(childDependencies);
     }
   }
+  return dependencies;
 }
 
 function* fetchResource(action) {

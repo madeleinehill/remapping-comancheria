@@ -59,9 +59,8 @@ const MdParser = (props) => {
     <ReactMarkdown
       allowDangerousHtml
       renderers={{ emphasis: props.noJargon ? undefined : Jargon }}
-    >
-      {props.children}
-    </ReactMarkdown>
+      source={props.children}
+    ></ReactMarkdown>
   );
 };
 

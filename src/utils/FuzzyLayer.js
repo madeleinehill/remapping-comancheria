@@ -22,10 +22,24 @@ function FuzzyLayer(props) {
     for (let i = 0; i < shapeData.length; i++) {
       const shape = new PIXI.Graphics();
       pixiContainer.addChild(shape);
+
+      let label = undefined;
+      // this conditional saves a lot of pain when labels are not enabled
+      if (
+        !!shapeData[i] &&
+        !!shapeData[i].properties &&
+        !!shapeData[i].properties.labelField
+      ) {
+        console.log(shapeData[i].properties.labelField);
+        label = new PIXI.Text("", {});
+        pixiContainer.addChild(label);
+      }
+
       shapes.push({
         positions: shapeData[i].positions,
         instance: shape,
         properties: shapeData[i].properties,
+        labelInstance: label,
       });
     }
     elementRef.current = new L.pixiOverlay(

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Provider } from "react-redux";
 import { createUseStyles } from "react-jss";
 
@@ -7,6 +7,7 @@ import Map from "./components/Map";
 import Sidebar from "./components/Sidebar";
 import MapOverlay from "./components/MapOverlay";
 import AppOverlay from "./components/AppOverlay";
+import Splash from "./components/Splash";
 
 const useStyles = createUseStyles({
   "@global": {
@@ -47,6 +48,9 @@ const useStyles = createUseStyles({
       fontSize: "12px",
       fontFamily: "Roboto",
     },
+    a: {
+      color: "#3047C8",
+    },
     button: {
       fontSize: "14px",
       fontFamily: "Roboto",
@@ -63,6 +67,8 @@ const useStyles = createUseStyles({
 function App(props) {
   const classes = useStyles();
 
+  const [showSplash, setShowSplash] = useState(true);
+
   return (
     <Provider store={store}>
       <div className={classes.splitVertical}>
@@ -73,6 +79,7 @@ function App(props) {
         </div>
       </div>
       <AppOverlay></AppOverlay>
+      <Splash visible={showSplash} setVisible={setShowSplash}></Splash>
     </Provider>
   );
 }

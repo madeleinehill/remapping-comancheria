@@ -1,81 +1,121 @@
 {
-    "name": "1. Introduction",
-    "content": [
-      {
-        "modal": {
-          "text": { "src": "./lessons/1/0.md" }
-        }
+  "name": "1. Introduction",
+  "content": [
+    {
+      "card": {
+        "text": { "src": "./lessons/1/0.md" }
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "./lessons/1/1.md" }
       },
-      {
-        "card": {
-          "text": {"src": "./lessons/1/1.md"}
-        },
-        "popups": [
-          {
-            "position": [36, -100],
-            "text": "## Comanchería \n The basic territory inhabited and controlled by the Comanche peoples."
-          }
-        ],
-        "overlays": [
-          {
-            "attributionUrl": "https://mapwarper.net/maps/52913/",
-            "attributionText": "MapWarper",
-            "tilesUrl": "https://mapwarper.net/maps/tile/52913/{z}/{x}/{y}.png"
-          }
-        ],
-        "geojson": [{
+      "popups": [
+        {
+          "position": [36, -100],
+          "text": "## Comanchería \n The basic territory inhabited and controlled by the Comanche peoples."
+        }
+      ],
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/52913/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/52913/{z}/{x}/{y}.png"
+        }
+      ],
+      "geojson": [
+        {
           "type": "FeatureCollection",
           "properties": {
-            "blurIntensity": 200
+            "blurIntensity": 200,
+            "labelField": "Name"
           },
           "features": {
             "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
           }
-        }]
+        }
+      ]
+    },
+
+    {
+      "card": {
+        "text": { "src": "./lessons/1/2.md" }
       },
-      {
-        "card": {
-          "text": {"src": "./lessons/1/2.md"}
-        },
-        "popups": [
-          {
-            "position": [36, -100],
-            "text": "## Comanchería \n The basic territory inhabited and controlled by the Comanche peoples."
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 10
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories"
           }
-        ],
-        "overlays": [
-          {
-            "attributionUrl": "https://mapwarper.net/maps/52913/",
-            "attributionText": "MapWarper",
-            "tilesUrl": "https://mapwarper.net/maps/tile/52913/{z}/{x}/{y}.png"
-          }
-        ],
-        "geojson": [{
+        }
+      ],
+      "zoomTo": {
+        "center": [35, -95],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "./lessons/1/2.md" }
+      },
+      "popups": [
+        {
+          "position": [36, -100],
+          "text": "## Comanchería \n The basic territory inhabited and controlled by the Comanche peoples."
+        }
+      ],
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/52913/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/52913/{z}/{x}/{y}.png"
+        }
+      ],
+      "geojson": [
+        {
           "type": "FeatureCollection",
           "features": {
             "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
           }
-        }]
-      },
-      {
-        "modal": {
-          "text": {"src": "./lessons/1/3.md"}
         }
-      },
-      {
-        "modal": {
-          "text": {"src": "./lessons/1/4.md"}
-        }
-      },
-      {
-        "modal": {
-          "text": {"src": "./lessons/1/5.md"}
-        }
-      },
-      {
-        "modal": {
-          "text": {"src": "./lessons/1/6.md"}
-        }
+      ]
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/1/3.md" },
+        "geojson": [
+          {
+            "type": "FeatureCollection",
+            "properties": {
+              "blurIntensity": 10,
+              "labelField": "FULL_NAME"
+            },
+            "features": [
+              {
+                "src": "./resources/us-states/ga_state-1802.geojson"
+              }
+            ]
+          }
+        ]
       }
-    ]
-  }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/1/4.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/1/5.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/1/6.md" }
+      }
+    }
+  ]
+}
