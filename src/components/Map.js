@@ -79,6 +79,15 @@ const MapWrapper = (props) => {
   const classes = useStyles(props);
   const { popups, overlays, polygons, geojson, zoomTo } = props;
 
+  const o = overlays.length
+    ? { opacity: 0.5, ...overlays[0] }
+    : {
+        attributionUrl: "https://mapwarper.net/maps/52913/",
+        attributionText: "MapWarper",
+        tilesUrl: "https://mapwarper.net/maps/tile/52913/{z}/{x}/{y}.png",
+        opacity: 0,
+      };
+
   return (
     <>
       <MapContainer
@@ -92,8 +101,6 @@ const MapWrapper = (props) => {
         <TileLayer
           url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}"
           attribution="Tiles &copy; Esri &mdash; Source: US National Park Service"
-          minZoom={2}
-          maxZoom={10}
         />
         {
           // <ImageOverlay
@@ -102,14 +109,18 @@ const MapWrapper = (props) => {
           //   opacity={0.5}
           // />
         }
-        {overlays.map((o) => (
+        {
           <TileLayer
-            attribution={`&copy; <a href="${o.attributionUrl}">${o.attributionText}</a> contributors`}
+            attribution={
+              o.attributionText
+                ? `&copy; <a href="${o.attributionUrl}">${o.attributionText}</a> contributors`
+                : ""
+            }
             url={o.tilesUrl}
-            opacity="0.5"
-            key={o.url}
+            opacity={o.opacity}
+            key={o.tilesUrl}
           />
-        ))}
+        }
         {/* {polygons.map((p, i) => (
           <FuzzyPolygon
             key={i}
@@ -118,7 +129,7 @@ const MapWrapper = (props) => {
           ></FuzzyPolygon>
         ))} */}
         {geojson.map(
-          (f) => f && <FuzzyLayer data={f} key={f.url}></FuzzyLayer>,
+          (f, i) => f && <FuzzyLayer data={f} key={`gj${i}`}></FuzzyLayer>,
         )}
         {popups.map((p, i) => (
           <Marker position={p.position} icon={customMarker}>

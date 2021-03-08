@@ -4,7 +4,9 @@
     {
       "type": "Feature",
       "properties": {
-        "blurIntensity": 200
+        "blurIntensity": 200,
+        "name": "Comanchería",
+        "labelField": "name"
       },
       "geometry": {
         "type": "Polygon",

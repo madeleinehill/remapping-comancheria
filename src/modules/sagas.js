@@ -77,7 +77,7 @@ function* fetchResources(action) {
       const dependencies = yield recursiveFetchResources(
         action.value.content[slide],
       );
-      console.log(slide, dependencies);
+
       yield put({
         type: SET_SLIDE_DEPENDENCIES,
         value: { slide, dependencies },

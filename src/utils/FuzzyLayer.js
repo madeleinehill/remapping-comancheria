@@ -30,15 +30,13 @@ function FuzzyLayer(props) {
         !!shapeData[i].properties &&
         !!shapeData[i].properties.labelField
       ) {
-        console.log(shapeData[i].properties.labelField);
         label = new PIXI.Text("", {});
         pixiContainer.addChild(label);
       }
 
       shapes.push({
-        positions: shapeData[i].positions,
+        geometry: shapeData[i],
         instance: shape,
-        properties: shapeData[i].properties,
         labelInstance: label,
       });
     }

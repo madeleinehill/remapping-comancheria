@@ -19,8 +19,6 @@ export const getModalContent = createSelector(
       return {};
     }
 
-    console.log(currentContent, resources);
-    console.log("resolving modal resources");
     return resolveResources(content[currentIndex].modal, resources);
   },
 );
@@ -81,8 +79,6 @@ export const getMapElements = createSelector(
 function resolveResources(el, resources) {
   // if el is an object, check if there is an src attribute to resolve
   // this function should not have been called if all dependencies are not loaded
-
-  console.log(el, resources);
   if (typeof el === "object" && el !== null && !!el["src"]) {
     return resources[el["src"]].value;
   }

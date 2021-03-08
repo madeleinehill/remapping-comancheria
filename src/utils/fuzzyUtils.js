@@ -11,10 +11,10 @@ export const shapeDefaults = {
   interact: false,
 };
 
-const drawPolygon = ({ shape, project, scale }) => {
-  const { positions, instance } = shape;
-
-  if (!positions || !positions.length) {
+const drawMultiPolygon = ({ shape, project, scale }) => {
+  const { geometry, instance } = shape;
+  const { polyPositions } = geometry;
+  if (!polyPositions || !polyPositions.length) {
     return;
   }
 
@@ -29,26 +29,87 @@ const drawPolygon = ({ shape, project, scale }) => {
     labelField,
   } = {
     ...shapeDefaults,
-    ...shape.properties,
+    ...shape.geometry.properties,
   };
 
   instance.clear();
   if (strokeWeight !== undefined) {
     instance.lineStyle(strokeWeight / scale, stroke, strokeOpacity);
   }
-  const projectedPolygon = positions.map((coords, index) => project(coords));
 
   const hexcode =
     color.length > 1 && color.substring(0, 1) === "#"
       ? `0x${color.substring(1)}`
       : color;
 
-  instance.beginFill(hexcode, fillOpacity);
-  projectedPolygon.forEach(function (coord, index) {
-    if (index === 0) instance.moveTo(coord.x, coord.y);
-    else instance.lineTo(coord.x, coord.y);
+  polyPositions.forEach((poly) =>
+    poly.forEach((ring, index) => {
+      // PIXI does not support interior holes within a graphic
+      // interior holes will be ignored
+      if (index > 0) {
+        return;
+      }
+
+      const projectedRing = ring.map((coords) => project(coords));
+
+      instance.beginFill(hexcode, fillOpacity);
+      instance.drawPolygon(
+        projectedRing.reduce(
+          (acc, coord) => acc.concat([coord.x, coord.y]),
+          [],
+        ),
+      );
+    }),
+  );
+
+  const blurfilter = new PIXI.filters.BlurFilter();
+  instance.filters = [blurfilter];
+  blurfilter.blur = blurIntensity * scale;
+};
+
+const drawPolygon = ({ shape, project, scale }) => {
+  console.log(shape);
+  const { geometry, instance } = shape;
+
+  if (!geometry) {
+    return;
+  }
+
+  const {
+    color,
+    fillOpacity,
+    strokeWeight,
+    stroke,
+    strokeOpacity,
+    blurIntensity,
+  } = {
+    ...shapeDefaults,
+    ...shape.geometry.properties,
+  };
+
+  instance.clear();
+  if (strokeWeight !== undefined) {
+    instance.lineStyle(strokeWeight / scale, stroke, strokeOpacity);
+  }
+
+  const hexcode =
+    color.length > 1 && color.substring(0, 1) === "#"
+      ? `0x${color.substring(1)}`
+      : color;
+
+  geometry.positions.forEach((ring, index) => {
+    const projectedRing = ring.map((coords) => project(coords));
+    // PIXI does not support interior holes within a graphic
+    // interior holes will be ignored
+    if (index > 0) {
+      return;
+    }
+
+    instance.beginFill(hexcode, fillOpacity);
+    instance.drawPolygon(
+      projectedRing.reduce((acc, coord) => acc.concat([coord.x, coord.y]), []),
+    );
   });
-  instance.endFill();
 
   // if (!!interact) {
   //   console.log("adding interactivity");
@@ -66,25 +127,19 @@ const drawPolygon = ({ shape, project, scale }) => {
   blurfilter.blur = blurIntensity * scale;
 };
 
-const drawLabel = ({ shape, project, scale }) => {
-  const { positions, labelInstance } = shape;
+const drawLabel = ({ shape, project, scale, size, centroid }) => {
+  const { geometry, labelInstance } = shape;
+  const { properties } = geometry;
 
-  const { properties } = shape;
-  console.log("drawing");
   if (!properties[properties.labelField]) {
     return;
   }
-
+  console.log(shape, project, size, centroid);
   labelInstance.text = properties[properties.labelField];
-
-  const parentShape = turf.polygon([positions.map((p) => [p.lat, p.lng])]);
-  const parentBbox = turf.bbox(parentShape);
-  const parentCentroid = turf.centroid(parentShape).geometry.coordinates;
-  const parentWidth = Math.abs(parentBbox[3] - parentBbox[1]);
 
   labelInstance.style = new PIXI.TextStyle({
     fontFamily: "Arial",
-    fontSize: parentWidth * 30,
+    fontSize: "300px",
     fontStyle: "italic",
     fontWeight: "bold",
     fill: "#ffffff",
@@ -96,13 +151,13 @@ const drawLabel = ({ shape, project, scale }) => {
     dropShadowAngle: Math.PI / 6,
     dropShadowDistance: 6,
     wordWrap: true,
-    wordWrapWidth: parentWidth * 300,
+    wordWrapWidth: size * 10,
     lineJoin: "round",
   });
 
   labelInstance.anchor.set(0.5);
 
-  const coords = project({ lat: parentCentroid[0], lng: parentCentroid[1] });
+  const coords = project({ lat: centroid[0], lng: centroid[1] });
   labelInstance.x = coords.x;
   labelInstance.y = coords.y;
 };
@@ -120,21 +175,55 @@ export const drawOverlay = ({ shapes, utils }) => {
   const scale = utils.getScale();
 
   shapes.forEach((shape) => {
-    drawPolygon({ shape, project, scale });
-
+    if (shape.geometry.type === "MultiPolygon") {
+      drawMultiPolygon({ shape, project, scale });
+    } else if (shape.geometry.type === "Polygon") {
+      drawPolygon({ shape, project, scale });
+    }
     if (shape.labelInstance) {
-      drawLabel({ shape, project, scale });
+      drawLabel({
+        shape,
+        project,
+        scale,
+        size: computeSize(shape.geometry),
+        centroid: computeCentroid(shape.geometry),
+      });
     }
   });
 
   renderer.render(container);
 };
 
-// takes any geojson and returns all embedded polygons as array
+const computeCentroid = (geometry) => {
+  if (geometry.type === "MultiPolygon") {
+    const mp = turf.multiPolygon(
+      geometry.polyPositions.map((poly) =>
+        poly.map((ring) => ring.map((coord) => [coord.lat, coord.lng])),
+      ),
+    );
+    return turf.centerOfMass(mp).geometry.coordinates;
+  }
 
+  if (geometry.type === "Polygon") {
+    const mp = turf.polygon(
+      geometry.positions.map((ring) =>
+        ring.map((coord) => [coord.lat, coord.lng]),
+      ),
+    );
+    return turf.centerOfMass(mp).geometry.coordinates;
+  }
+  return [0, 0];
+};
+
+const computeSize = (geometry) => {
+  return 30;
+};
+
+// takes any geojson and returns all embedded polygons and
+// multipolygons as array of polygons and multipolygons
 export const parseGeojson = (geo, properties = {}) => {
   if (geo.type === "FeatureCollection") {
-    return geo.features.map((f) => parseGeojson(f, geo.properties)).flat();
+    return geo.features.map((f) => parseGeojson(f, geo.properties));
   }
   if (geo.type === "Feature") {
     return parseGeojson(geo.geometry, { ...properties, ...geo.properties });
@@ -145,22 +234,31 @@ export const parseGeojson = (geo, properties = {}) => {
       .map((f) => parseGeojson(f, { ...properties, ...geo.properties }))
       .flat();
   }
-  // not tested
   if (geo.type === "MultiPolygon") {
-    geo.coordinates.map((f) =>
-      parseGeojson(
-        { type: "Polygon", coordinates: f },
-        { ...properties, ...geo.properties },
-      ).flat(),
-    );
+    return {
+      type: "MultiPolygon",
+      properties: properties,
+      polyPositions: geo.coordinates.map((poly) =>
+        poly.map((ring) =>
+          ring.map((c) => ({
+            lat: c[1],
+            lng: c[0],
+          })),
+        ),
+      ),
+    };
   }
   if (geo.type === "Polygon") {
-    return [
-      {
-        positions: geo.coordinates[0].map((c) => ({ lat: c[1], lng: c[0] })),
-        properties: { ...properties, ...geo.properties },
-      },
-    ];
+    return {
+      type: "Polygon",
+      positions: geo.coordinates.map((ring) =>
+        ring.map((c) => ({
+          lat: c[1],
+          lng: c[0],
+        })),
+      ),
+      properties: { ...properties, ...geo.properties },
+    };
   }
   return [];
 };
