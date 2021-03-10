@@ -124,6 +124,10 @@
       "geojson": [
         {
           "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
           "features": {
             "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
           }
@@ -143,6 +147,9 @@
       "geojson": [
         {
           "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 10
+          },
           "features": {
             "src": "https://native-land.ca/api/index.php?maps=territories"
           }
@@ -169,6 +176,10 @@
         {
           "type": "FeatureCollection",
           "features": {
+            "properties": {
+              "blurIntensity": 20,
+              "label": "Comanchería"
+            },
             "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
           }
         }
@@ -189,6 +200,10 @@
       "geojson": [
         {
           "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
           "features": {
             "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
           }
@@ -210,6 +225,10 @@
       "geojson": [
         {
           "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
           "features": {
             "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
           }
