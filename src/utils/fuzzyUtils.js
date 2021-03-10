@@ -26,7 +26,6 @@ const drawMultiPolygon = ({ shape, project, scale }) => {
     strokeOpacity,
     blurIntensity,
     interact,
-    labelField,
   } = {
     ...shapeDefaults,
     ...shape.geometry.properties,
@@ -131,20 +130,18 @@ const drawLabel = ({ shape, project, scale, size, centroid }) => {
   const { geometry, labelInstance } = shape;
   const { properties } = geometry;
 
-  if (!properties[properties.labelField]) {
+  if (!properties["label"]) {
     return;
   }
   console.log(shape, project, size, centroid);
-  labelInstance.text = properties[properties.labelField];
+  labelInstance.text = properties["label"];
 
   labelInstance.style = new PIXI.TextStyle({
     fontFamily: "Arial",
-    fontSize: "300px",
-    fontStyle: "italic",
-    fontWeight: "bold",
+    fontSize: !!properties.labelScale ? properties.labelScale * size : size,
     fill: "#ffffff",
     stroke: "#1d1d1d",
-    strokeThickness: 5,
+    strokeThickness: 3,
     dropShadow: true,
     dropShadowColor: "#000000",
     dropShadowBlur: 4,
@@ -216,7 +213,7 @@ const computeCentroid = (geometry) => {
 };
 
 const computeSize = (geometry) => {
-  return 30;
+  return 15;
 };
 
 // takes any geojson and returns all embedded polygons and

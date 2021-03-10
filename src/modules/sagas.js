@@ -88,7 +88,7 @@ function* fetchResources(action) {
   }
 }
 
-function* recursiveFetchResources(el) {
+function* recursiveFetchResources(el, overrides = {}) {
   let dependencies = [];
 
   // if el is an object
@@ -102,12 +102,26 @@ function* recursiveFetchResources(el) {
       });
       dependencies.push(el["src"]);
     }
+
+    // apply overrides, after merging with current scope
+    overrides =
+      !!el.overrides && typeof el.overrides === "object"
+        ? { ...overrides, ...el.overrides }
+        : overrides;
+    Object.entries(overrides).forEach(([key, override]) => {
+      if (!!el[override]) {
+        el[key] = el[override];
+      }
+    });
   }
   // crawl children if el is array or object
   if (Array.isArray(el) || (typeof el === "object" && el !== null)) {
     // crawl elements
     for (const child in el) {
-      const childDependencies = yield recursiveFetchResources(el[child]);
+      const childDependencies = yield recursiveFetchResources(
+        el[child],
+        overrides,
+      );
       dependencies = dependencies.concat(childDependencies);
     }
   }

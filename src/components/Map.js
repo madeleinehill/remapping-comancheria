@@ -95,6 +95,8 @@ const MapWrapper = (props) => {
         center={[35, -105]}
         zoom={5}
         zoomControl={false}
+        minZoom={5}
+        maxZoom={7}
       >
         {props.children}
         <ZoomTo value={zoomTo} geojson={geojson} />
