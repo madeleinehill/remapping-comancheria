@@ -18,10 +18,6 @@ const useStyles = createUseStyles({
     padding: "15px",
     margin: "10px 0",
     boxShadow: "0 3px 14px rgba(0,0,0,0.4)",
-    "& p": {
-      fontSize: "14px",
-      lineHeight: "20px",
-    },
   },
   navCard: {
     opacity: "0.8",

@@ -11,6 +11,9 @@ export const shapeDefaults = {
   interact: false,
 };
 
+export const hexCodeFromString = (str) =>
+  str.length > 1 && str.substring(0, 1) === "#" ? `0x${str.substring(1)}` : str;
+
 const drawMultiPolygon = ({ shape, project, scale }) => {
   const { geometry, instance } = shape;
   const { polyPositions } = geometry;
@@ -33,13 +36,12 @@ const drawMultiPolygon = ({ shape, project, scale }) => {
 
   instance.clear();
   if (strokeWeight !== undefined) {
-    instance.lineStyle(strokeWeight / scale, stroke, strokeOpacity);
+    instance.lineStyle(
+      strokeWeight / scale,
+      hexCodeFromString(stroke),
+      strokeOpacity,
+    );
   }
-
-  const hexcode =
-    color.length > 1 && color.substring(0, 1) === "#"
-      ? `0x${color.substring(1)}`
-      : color;
 
   polyPositions.forEach((poly) =>
     poly.forEach((ring, index) => {
@@ -51,7 +53,7 @@ const drawMultiPolygon = ({ shape, project, scale }) => {
 
       const projectedRing = ring.map((coords) => project(coords));
 
-      instance.beginFill(hexcode, fillOpacity);
+      instance.beginFill(hexCodeFromString(color), fillOpacity);
       instance.drawPolygon(
         projectedRing.reduce(
           (acc, coord) => acc.concat([coord.x, coord.y]),
@@ -67,7 +69,6 @@ const drawMultiPolygon = ({ shape, project, scale }) => {
 };
 
 const drawPolygon = ({ shape, project, scale }) => {
-  console.log(shape);
   const { geometry, instance } = shape;
 
   if (!geometry) {
@@ -88,13 +89,12 @@ const drawPolygon = ({ shape, project, scale }) => {
 
   instance.clear();
   if (strokeWeight !== undefined) {
-    instance.lineStyle(strokeWeight / scale, stroke, strokeOpacity);
+    instance.lineStyle(
+      strokeWeight / scale,
+      hexCodeFromString(stroke),
+      strokeOpacity,
+    );
   }
-
-  const hexcode =
-    color.length > 1 && color.substring(0, 1) === "#"
-      ? `0x${color.substring(1)}`
-      : color;
 
   geometry.positions.forEach((ring, index) => {
     const projectedRing = ring.map((coords) => project(coords));
@@ -104,7 +104,7 @@ const drawPolygon = ({ shape, project, scale }) => {
       return;
     }
 
-    instance.beginFill(hexcode, fillOpacity);
+    instance.beginFill(hexCodeFromString(color), fillOpacity);
     instance.drawPolygon(
       projectedRing.reduce((acc, coord) => acc.concat([coord.x, coord.y]), []),
     );
@@ -126,14 +126,45 @@ const drawPolygon = ({ shape, project, scale }) => {
   blurfilter.blur = blurIntensity * scale;
 };
 
+const drawLineString = ({ shape, project, scale }) => {
+  const { geometry, instance } = shape;
+
+  if (!geometry || !geometry.positions || geometry.positions.length < 2) {
+    return;
+  }
+
+  const { strokeWeight, stroke, strokeOpacity } = {
+    ...shapeDefaults,
+    strokeWeight: 3,
+    ...shape.geometry.properties,
+  };
+
+  instance.clear();
+  if (strokeWeight !== undefined) {
+    instance.lineStyle(
+      strokeWeight / scale,
+      hexCodeFromString(stroke),
+      strokeOpacity,
+    );
+  }
+
+  const projectCoords = geometry.positions.map((c) => project(c));
+  projectCoords.forEach((coord, i) => {
+    if (i === 0) {
+      instance.moveTo(projectCoords[i].x, projectCoords[i].y);
+    } else {
+      instance.lineTo(projectCoords[i].x, projectCoords[i].y);
+    }
+  });
+};
+
 const drawLabel = ({ shape, project, scale, size, centroid }) => {
   const { geometry, labelInstance } = shape;
   const { properties } = geometry;
-
   if (!properties["label"]) {
     return;
   }
-  console.log(shape, project, size, centroid);
+
   labelInstance.text = properties["label"];
 
   labelInstance.style = new PIXI.TextStyle({
@@ -176,6 +207,8 @@ export const drawOverlay = ({ shapes, utils }) => {
       drawMultiPolygon({ shape, project, scale });
     } else if (shape.geometry.type === "Polygon") {
       drawPolygon({ shape, project, scale });
+    } else if (shape.geometry.type === "LineString") {
+      drawLineString({ shape, project, scale });
     }
     if (shape.labelInstance) {
       drawLabel({
@@ -254,6 +287,16 @@ export const parseGeojson = (geo, properties = {}) => {
           lng: c[0],
         })),
       ),
+      properties: { ...properties, ...geo.properties },
+    };
+  }
+  if (geo.type === "LineString") {
+    return {
+      type: "LineString",
+      positions: geo.coordinates.map((coord) => ({
+        lat: coord[1],
+        lng: coord[0],
+      })),
       properties: { ...properties, ...geo.properties },
     };
   }

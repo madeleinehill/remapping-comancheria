@@ -36,18 +36,30 @@
       ],
       "zoomTo": {
         "center": [35.52, -84.36],
-        "zoomLevel": 7
+        "zoomLevel": 6
       }
     },
     {
       "card": {
         "text": { "src": "./lessons/1/2.md" }
       },
+      "popups": [
+        {
+          "position": [40, -78.5],
+          "text": "The Proclamation of 1763 forbade settlement and land speculation west of the Appalachian mountains. Here is an approximation of the boundary imposed by the proclamation."
+        }
+      ],
       "overlays": [
         {
           "attributionUrl": "https://mapwarper.net/maps/38000/",
           "attributionText": "MapWarper",
           "tilesUrl": "https://mapwarper.net/maps/tile/38000/{z}/{x}/{y}.png"
+        }
+      ],
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "features": [{ "src": "./resources/proc_1763.geojson" }]
         }
       ],
       "zoomTo": {
@@ -67,7 +79,10 @@
             "label": "Ohio Country"
           },
 
-          "features": [{ "src": "./resources/us-states/oh_state-1803.geojson" }]
+          "features": [
+            { "src": "./resources/ohio_country.geojson" },
+            { "src": "./resources/proc_1763.geojson" }
+          ]
         }
       ],
       "popups": [
@@ -82,25 +97,31 @@
           "attributionText": "MapWarper",
           "tilesUrl": "https://mapwarper.net/maps/tile/38000/{z}/{x}/{y}.png"
         }
-      ]
+      ],
+      "zoomTo": {
+        "center": [40.4, -82.9],
+        "zoomLevel": 6
+      }
     },
 
     {
-      "modal": {
+      "card": {
         "text": { "src": "./lessons/1/4.md" }
       },
-      "overlays": [
+      "geojson": [
         {
-          "attributionUrl": "https://mapwarper.net/maps/38000/",
-          "attributionText": "MapWarper",
-          "tilesUrl": "https://mapwarper.net/maps/tile/38000/{z}/{x}/{y}.png"
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 30,
+            "label": "Ohio Country"
+          },
+
+          "features": [
+            { "src": "./resources/ohio_country.geojson" },
+            { "src": "./resources/proc_1763.geojson" }
+          ]
         }
-      ]
-    },
-    {
-      "modal": {
-        "text": { "src": "./lessons/1/5.md" }
-      },
+      ],
       "overlays": [
         {
           "attributionUrl": "https://mapwarper.net/maps/38000/",
@@ -111,7 +132,51 @@
     },
     {
       "card": {
+        "text": { "src": "./lessons/1/5.md" }
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/38000/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/38000/{z}/{x}/{y}.png"
+        }
+      ],
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 40,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        }
+      ],
+      "zoomTo": {
+        "position": [35, -101],
+        "zoomLevel": 6
+      }
+    },
+    {
+      "card": {
         "text": { "src": "./lessons/1/6.md" }
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/39813/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/39813/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [40, -95],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "./lessons/1/7.md" }
       },
       "overlays": [
         {
@@ -125,7 +190,7 @@
         {
           "type": "FeatureCollection",
           "properties": {
-            "blurIntensity": 20,
+            "blurIntensity": 40,
             "label": "Comanchería"
           },
           "features": {
@@ -135,14 +200,14 @@
       ],
       "popups": [
         {
-          "position": [35, -103],
-          "text": "## Comancheria \n While the United States and Mexico ended the Mexican American War with the Mexican Cession in 1848, establishing the borders depicted on this map, this geographical representation provides minimal reference to the Comanches, who dominated much of the Southwest. Their territory, Comanchería, is depicted in blue."
+          "position": [35, -101],
+          "text": "## Comancheria \n While the United States and Mexico ended the Mexican American War with the Mexican Cession in 1848, establishing the borders depicted on this map, this geographical representation provides minimal reference to the Comanches, who dominated much of the Southwest. Their territory, Comanchería, is depicted in brown."
         }
       ]
     },
     {
       "card": {
-        "text": { "src": "./lessons/1/7.md" }
+        "text": { "src": "./lessons/1/8.md" }
       },
       "geojson": [
         {
@@ -162,7 +227,7 @@
     },
     {
       "modal": {
-        "text": { "src": "./lessons/1/8.md" }
+        "text": { "src": "./lessons/1/9.md" }
       },
       "overlays": [
         {
@@ -177,34 +242,9 @@
           "type": "FeatureCollection",
           "features": {
             "properties": {
-              "blurIntensity": 20,
+              "blurIntensity": 40,
               "label": "Comanchería"
             },
-            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
-          }
-        }
-      ]
-    },
-    {
-      "modal": {
-        "text": { "src": "./lessons/1/9.md" }
-      },
-      "overlays": [
-        {
-          "attributionUrl": "https://mapwarper.net/maps/32056/",
-          "attributionText": "MapWarper",
-          "tilesUrl": "https://mapwarper.net/maps/tile/32056/{z}/{x}/{y}.png"
-        }
-      ],
-
-      "geojson": [
-        {
-          "type": "FeatureCollection",
-          "properties": {
-            "blurIntensity": 20,
-            "label": "Comanchería"
-          },
-          "features": {
             "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
           }
         }
@@ -226,7 +266,32 @@
         {
           "type": "FeatureCollection",
           "properties": {
-            "blurIntensity": 20,
+            "blurIntensity": 40,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        }
+      ]
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/1/11.md" }
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/32056/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/32056/{z}/{x}/{y}.png"
+        }
+      ],
+
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 40,
             "label": "Comanchería"
           },
           "features": {

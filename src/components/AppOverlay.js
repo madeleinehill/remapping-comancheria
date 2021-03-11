@@ -9,7 +9,7 @@ const useStyles = createUseStyles({
     display: "block",
     position: "absolute",
     width: "300px",
-    height: "200px",
+    maxHeight: "250px",
     left: (props) =>
       window.innerWidth > props.overlay.posX + 300
         ? props.overlay.posX - 5
@@ -26,6 +26,8 @@ const useStyles = createUseStyles({
     padding: "1rem",
     borderRadius: "4px",
     fontSize: "90%",
+
+    overflowY: "hidden",
   },
 });
 

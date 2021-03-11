@@ -24,11 +24,12 @@ function FuzzyLayer(props) {
       pixiContainer.addChild(shape);
 
       let label = undefined;
+
       // this conditional saves a lot of pain when labels are not enabled
       if (
         !!shapeData[i] &&
         !!shapeData[i].properties &&
-        !!shapeData[i].properties.labelField
+        !!shapeData[i].properties.label
       ) {
         label = new PIXI.Text("", {});
         pixiContainer.addChild(label);

@@ -24,6 +24,9 @@ const useStyles = createUseStyles({
       overflow: "hidden",
       top: "0",
       left: "0",
+      fontFamily: "Roboto",
+      fontSize: "14px",
+      lineHeight: 1.35,
     },
     h1: {
       fontFamily: "Red Hat Text",
@@ -43,10 +46,6 @@ const useStyles = createUseStyles({
       fontSize: "14px",
       color: "#393939",
       margin: "0",
-    },
-    p: {
-      fontSize: "12px",
-      fontFamily: "Roboto",
     },
     a: {
       color: "#3047C8",

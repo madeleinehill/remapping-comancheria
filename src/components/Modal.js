@@ -18,9 +18,10 @@ const useStyles = createUseStyles({
     margin: "10px",
     boxShadow: "0 3px 14px rgba(0,0,0,0.4)",
     overflowY: "auto",
+
     "& p": {
       fontSize: "14px",
-      lineHeight: "20px",
+      lineHeight: 1.5,
     },
   },
   contentWrapper: {

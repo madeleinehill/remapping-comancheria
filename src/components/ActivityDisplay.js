@@ -21,10 +21,6 @@ const useStyles = createUseStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    "& p": {
-      fontSize: "14px",
-      lineHeight: "20px",
-    },
   },
 });
 
