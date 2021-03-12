@@ -18,6 +18,10 @@ const jargon = {
   frenchandindianwar:
     "The French and Indian War (1754-1763) saw the British and French empires in North America compete for control of territory. Indigenous peoples played a large role in the conflict, forming alliances which they deemed beneficial to their political interests. As a result of the war, France largely reliquished its claims in North America.",
   angloamericans: "People of either Britain or the United States",
+  hegemony:
+    "A state of dominance of one group over others in which there is a severe asymmetry in the distribution of power or influence.",
+  postcontact:
+    "Referring to the time after which Europeans had engaged with a given place or group. Such contact occured at different points for different groups.",
 };
 
 export default jargon;
