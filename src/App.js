@@ -3,11 +3,9 @@ import { Provider } from "react-redux";
 import { createUseStyles } from "react-jss";
 
 import { store } from "./modules/store";
-import Map from "./components/Map";
-import Sidebar from "./components/Sidebar";
-import MapOverlay from "./components/MapOverlay";
-import AppOverlay from "./components/AppOverlay";
-import Splash from "./components/Splash";
+
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Main } from "./components/Main";
 
 const useStyles = createUseStyles({
   "@global": {
@@ -55,30 +53,20 @@ const useStyles = createUseStyles({
       fontFamily: "Roboto",
     },
   },
-  splitVertical: {
-    display: "flex",
-    width: "100vw",
-    height: "100vh",
-    position: "relative",
-  },
 });
 
 function App(props) {
   const classes = useStyles();
-
-  const [showSplash, setShowSplash] = useState(true);
-
   return (
     <Provider store={store}>
-      <div className={classes.splitVertical}>
-        <Sidebar></Sidebar>
-        <div style={{ flex: "2 0 0", position: "relative" }}>
-          <Map />
-          <MapOverlay></MapOverlay>
-        </div>
-      </div>
-      <AppOverlay></AppOverlay>
-      <Splash visible={showSplash} setVisible={setShowSplash}></Splash>
+      <Router>
+        <Switch>
+          <Route path="/about">{/* <About /> */}</Route>
+          <Route path="/">
+            <Main />
+          </Route>
+        </Switch>
+      </Router>
     </Provider>
   );
 }

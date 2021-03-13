@@ -1,15 +1,32 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FETCH_LESSON, SET_INDEX } from "../modules/actions";
 import { SUCCESS } from "../utils/constants";
 
 import { createUseStyles } from "react-jss";
+import { useRouteMatch } from "react-router";
+import { Link } from "react-router-dom";
 
 const useStyles = createUseStyles({
-  mainSeq: { padding: "10px" },
+  mainSeq: {
+    padding: "10px",
+    "& a": { textDecoration: "none" },
+    "& >": {
+      "&:not(:first-child)::before": {
+        content: '""',
+        display: "block",
+        margin: "3px 17px",
+        width: "0px",
+        height: "5px",
+        border: "1px solid #666",
+      },
+    },
+  },
   numLabel: {
     cursor: "pointer",
+    color: "#adadad",
+    textDecoration: "none",
 
     "&:hover": {
       color: "#eee",
@@ -26,14 +43,6 @@ const useStyles = createUseStyles({
       alignItems: "center",
       justifyContent: "center",
     },
-    "&:not(:first-child)::before": {
-      content: '""',
-      display: "block",
-      margin: "3px 17px",
-      width: "0px",
-      height: "5px",
-      border: "1px solid #666",
-    },
   },
   selectedLabel: {
     color: "#fff",
@@ -41,16 +50,6 @@ const useStyles = createUseStyles({
       background: "#3047C8",
       border: "2px solid #3047C8",
       color: "#fff",
-    },
-  },
-  circleWrapper: {
-    "&::before": {
-      content: '""',
-      display: "block",
-      margin: "3px 17px",
-      width: "0px",
-      height: "5px",
-      border: "1px solid #666",
     },
   },
   circle: {
@@ -69,31 +68,62 @@ const useStyles = createUseStyles({
     },
   },
   completedCircleWrapper: {
-    "& > div": {
+    "& > a > div": {
       border: "2px solid #fff",
       background: "#fff",
     },
     "&::before": {
-      border: "1px solid #fff",
+      border: "1px solid #fff !important",
     },
   },
 });
 
 const ConfiguredSidebar = (props) => {
-  const { currentLesson, availableLessons, loadLesson, setIndex } = props;
-  const currentLessonValue = currentLesson.src;
-
   const classes = useStyles();
 
+  const { currentLesson, availableLessons } = useSelector((state) => ({
+    currentLesson: state.currentLesson,
+    availableLessons: state.availableLessons,
+  }));
+
+  const dispatch = useDispatch();
+  const setIndex = (index) => dispatch({ type: SET_INDEX, value: index });
+  const setLesson = (id) => dispatch({ type: FETCH_LESSON, value: id });
+
+  const currentLessonValue = currentLesson.src;
+
   const handleSubmit = (id) => {
-    loadLesson(id);
+    setLesson(id);
     props.handleClose();
   };
+
+  // if url is different, update lesson and index to match the url
+  const match = useRouteMatch("/lesson/:lessonID/index/:index");
+  useEffect(() => {
+    const { params } = match ? match : {};
+    const { lessonID, index } = params ? params : {};
+
+    console.log(index, currentLesson.currentIndex);
+    if (
+      !!lessonID &&
+      !!currentLessonValue &&
+      lessonID.toString() !== currentLessonValue.toString()
+    ) {
+      console.log("lessons do not match", lessonID, currentLessonValue);
+      setLesson(lessonID);
+    } else if (
+      Number.isInteger(parseInt(index)) &&
+      Number.isInteger(currentLesson.currentIndex) &&
+      parseInt(index) - 1 !== currentLesson.currentIndex
+    ) {
+      console.log("indices do not match", index, currentLesson.currentIndex);
+      setIndex(parseInt(index) - 1);
+    }
+  });
 
   return (
     <div style={{ minWidth: "200px", padding: "10px" }}>
       <h2>Remapping Comanchería:</h2>
-      {/* <p>{currentLesson.name ? currentLesson.name : "No lesson selected"}</p> */}
       <div className={classes.mainSeq}>
         {availableLessons.loadingStatus === SUCCESS && [
           ...availableLessons.lessons.map((l, i) =>
@@ -108,29 +138,30 @@ const ConfiguredSidebar = (props) => {
                 </h2>
                 {Object.keys(currentLesson.content).map((n, j) => (
                   <div
-                    className={`${classes.circleWrapper} ${
+                    className={`${
                       currentLesson.currentIndex >= j
                         ? classes.completedCircleWrapper
                         : ""
                     }`}
                     key={`li ${j}`}
                   >
-                    <div
-                      className={classes.circle}
-                      onClick={() => setIndex(j)}
-                    ></div>
+                    <Link to={`/lesson/${l.src}/index/${j + 1}`}>
+                      <div className={classes.circle}></div>
+                    </Link>
                   </div>
                 ))}
               </>
             ) : (
-              <h2
-                className={classes.numLabel}
-                value={l.src}
-                onClick={() => handleSubmit(l.src)}
-                key={i}
-              >
-                <div>{i + 1}</div> {l.name}
-              </h2>
+              <Link to={`/lesson/${l.src}`}>
+                <h2
+                  className={classes.numLabel}
+                  value={l.src}
+                  onClick={() => handleSubmit(l.src)}
+                  key={i}
+                >
+                  <div>{i + 1}</div> {l.name}
+                </h2>
+              </Link>
             ),
           ),
         ]}
@@ -139,14 +170,4 @@ const ConfiguredSidebar = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentLesson: state.currentLesson,
-  availableLessons: state.availableLessons,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadLesson: (src) => dispatch({ type: FETCH_LESSON, value: src }),
-  setIndex: (value) => dispatch({ type: SET_INDEX, value: value }),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConfiguredSidebar);
+export default ConfiguredSidebar;

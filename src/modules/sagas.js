@@ -37,15 +37,13 @@ const public_dir = (url) => {
   return axios.request({
     method: "get",
     url: url,
+    baseURL: window.location.origin,
   });
 };
 
 function* fetchAvailableLessons() {
   try {
-    const response = yield call(
-      public_dir,
-      `${process.env.PUBLIC_URL}/lessons/available_lessons.json`,
-    );
+    const response = yield call(public_dir, "/lessons/available_lessons.json");
     yield put({
       type: FETCH_AVAILABLE_LESSONS_SUCCEEDED,
       value: response.data,
@@ -59,7 +57,7 @@ function* fetchLesson(action) {
   try {
     const response = yield call(
       public_dir,
-      `${process.env.PUBLIC_URL}/lessons/${action.value}/master.json`,
+      `/lessons/${action.value}/master.json`,
     );
     yield put({
       type: FETCH_LESSON_SUCCEEDED,

@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { createUseStyles } from "react-jss";
 
 import { getModalContent, getCardContent } from "../modules/selectors";
@@ -62,13 +62,15 @@ const useStyles = createUseStyles({
 const MapOverlay = (props) => {
   const classes = useStyles();
 
-  const {
-    currentLesson,
-    modalContent,
-    cardContent,
-    incrementIndex,
-    decrementIndex,
-  } = props;
+  const dispatch = useDispatch();
+  const incrementIndex = () => dispatch({ type: INCREMENT_INDEX });
+  const decrementIndex = () => dispatch({ type: DECREMENT_INDEX });
+
+  const { modalContent, cardContent, currentLesson } = useSelector((state) => ({
+    modalContent: getModalContent(state),
+    cardContent: getCardContent(state),
+    currentLesson: state.currentLesson,
+  }));
   const { loadingStatus, currentIndex, content, name } = currentLesson;
 
   if (loadingStatus === LOADING) {
@@ -83,8 +85,7 @@ const MapOverlay = (props) => {
             text={"## Lesson Loading..."}
             navIndex={0}
             maxIndex={0}
-            incrementIndex={() => {}}
-            decrementIndex={() => {}}
+            currentLessonID={""}
             hasCard={true}
           ></Guide>
         </div>
@@ -106,8 +107,7 @@ const MapOverlay = (props) => {
             }
             navIndex={0}
             maxIndex={0}
-            incrementIndex={() => {}}
-            decrementIndex={() => {}}
+            currentLessonID={""}
             hasCard={true}
           ></Guide>
         </div>
@@ -131,28 +131,11 @@ const MapOverlay = (props) => {
           {...cardContent}
           navIndex={currentIndex + 1}
           maxIndex={Object.keys(content).length}
-          incrementIndex={incrementIndex}
-          decrementIndex={decrementIndex}
+          currentLessonID={currentLesson.src}
         ></Guide>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  const modalContent = getModalContent(state);
-  const cardContent = getCardContent(state);
-  return {
-    currentLesson: state.currentLesson,
-    resources: state.resources,
-    modalContent: modalContent,
-    cardContent: cardContent,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  incrementIndex: () => dispatch({ type: INCREMENT_INDEX }),
-  decrementIndex: () => dispatch({ type: DECREMENT_INDEX }),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapOverlay);
+export default MapOverlay;

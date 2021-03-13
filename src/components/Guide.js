@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import { ArrowLeft, ArrowRight } from "@material-ui/icons";
+import React from "react";
+import { Link } from "react-router-dom";
 import { createUseStyles } from "react-jss";
+import { ArrowLeft, ArrowRight } from "@material-ui/icons";
+
 import MdParser from "../utils/MdParser";
+
 const useStyles = createUseStyles({
   container: {
     maxWidth: "400px",
@@ -43,7 +46,7 @@ const useStyles = createUseStyles({
 
 const Guide = (props) => {
   const classes = useStyles();
-  const { text, navIndex, maxIndex, incrementIndex, decrementIndex } = props;
+  const { text, navIndex, maxIndex, currentLessonID } = props;
 
   return (
     <div className={classes.container}>
@@ -58,12 +61,20 @@ const Guide = (props) => {
             Progress: {navIndex}/{maxIndex}
           </p>
           <div style={{ flexGrow: 2 }}></div>
-          <button disabled={navIndex <= 1} onClick={decrementIndex}>
+          <Link
+            to={`/lesson/${currentLessonID}/index/${navIndex - 1}`}
+            onClick={(e) => (navIndex <= 1 ? e.preventDefault() : () => null)} // prevents navigating out of bounds
+          >
             <ArrowLeft />
-          </button>
-          <button disabled={navIndex >= maxIndex} onClick={incrementIndex}>
+          </Link>
+          <Link
+            to={`/lesson/${currentLessonID}/index/${navIndex + 1}`}
+            onClick={(e) =>
+              navIndex >= maxIndex ? e.preventDefault() : () => null
+            } // prevents navigating out of bounds
+          >
             <ArrowRight />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

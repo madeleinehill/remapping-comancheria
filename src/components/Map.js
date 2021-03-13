@@ -8,18 +8,18 @@ import {
   useMap,
   ImageOverlay,
 } from "react-leaflet";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
+import { createUseStyles } from "react-jss";
+
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import FuzzyLayer from "../utils/FuzzyLayer";
-import FuzzyPolygon from "../utils/FuzzyPolygon";
+
 import * as turf from "@turf/turf";
 
 import { getMapElements } from "../modules/selectors";
 
-import { createUseStyles } from "react-jss";
-// import ReactMarkdown from "react-markdown";
 import MdParser from "../utils/MdParser";
+import FuzzyLayer from "../utils/FuzzyLayer";
 
 const useStyles = createUseStyles((theme) => ({
   map: {
@@ -77,7 +77,9 @@ function ZoomTo({ value, geojson }) {
 
 const MapWrapper = (props) => {
   const classes = useStyles(props);
-  const { popups, overlays, polygons, geojson, zoomTo } = props;
+  const { popups, overlays, polygons, geojson, zoomTo } = useSelector(
+    getMapElements,
+  );
 
   const o = overlays.length
     ? { opacity: 0.5, ...overlays[0] }
@@ -145,10 +147,4 @@ const MapWrapper = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return getMapElements(state);
-};
-
-const mapDispatchToProps = (dispatch) => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapWrapper);
+export default MapWrapper;

@@ -59,7 +59,14 @@ const MdParser = (props) => {
     <div className={classes.mdContent}>
       <ReactMarkdown
         allowDangerousHtml
-        renderers={{ emphasis: props.noJargon ? undefined : Jargon }}
+        renderers={{
+          emphasis: props.noJargon ? undefined : Jargon,
+          link: (props) => (
+            <a href={props.href} target="_blank" rel="noreferrer">
+              {props.children}
+            </a>
+          ),
+        }}
         source={props.children}
       ></ReactMarkdown>
     </div>
