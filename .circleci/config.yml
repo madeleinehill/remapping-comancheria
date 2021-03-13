@@ -1,8 +1,4 @@
-version: 2.1
-
-orbs:
-  rsync: aplazame/rsync@0.0.17
-
+version: 2
 jobs:
   build:
     docker:
@@ -24,7 +20,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            rsync -avce ssh ~/project/build/. $SSH_USER@$SSH_TARGET
+            scp -v -r -o StrictHostKeyChecking=no ~/project/build/* $SSH_USER@$SSH_TARGET
 
 workflows:
   version: 2

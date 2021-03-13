@@ -22,9 +22,10 @@ export const Main = (props) => {
   const classes = useStyles();
 
   const match = useRouteMatch("/lesson/:lessonID/index/:index");
-  const { params } = match ? match : {};
-  const { lessonID } = params ? params : {};
-  const [showSplash, setShowSplash] = useState(!!lessonID ? false : true);
+  const matchNoIndex = useRouteMatch("/lesson/:lessonID/");
+  const [showSplash, setShowSplash] = useState(
+    !!match || !!matchNoIndex ? false : true,
+  );
 
   return (
     <>

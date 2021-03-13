@@ -98,26 +98,37 @@ const ConfiguredSidebar = (props) => {
   };
 
   // if url is different, update lesson and index to match the url
-  const match = useRouteMatch("/lesson/:lessonID/index/:index");
+  const matchIndex = useRouteMatch("/lesson/:lessonID/index/:index");
+  const matchNoIndex = useRouteMatch("/lesson/:lessonID/");
   useEffect(() => {
-    const { params } = match ? match : {};
-    const { lessonID, index } = params ? params : {};
+    if (!!matchIndex) {
+      const { params } = matchIndex;
+      const { lessonID, index } = params ? params : {};
 
-    console.log(index, currentLesson.currentIndex);
-    if (
-      !!lessonID &&
-      !!currentLessonValue &&
-      lessonID.toString() !== currentLessonValue.toString()
-    ) {
-      console.log("lessons do not match", lessonID, currentLessonValue);
-      setLesson(lessonID);
-    } else if (
-      Number.isInteger(parseInt(index)) &&
-      Number.isInteger(currentLesson.currentIndex) &&
-      parseInt(index) - 1 !== currentLesson.currentIndex
-    ) {
-      console.log("indices do not match", index, currentLesson.currentIndex);
-      setIndex(parseInt(index) - 1);
+      if (
+        !!lessonID &&
+        !!currentLessonValue &&
+        lessonID.toString() !== currentLessonValue.toString()
+      ) {
+        setLesson(lessonID);
+      } else if (
+        Number.isInteger(parseInt(index)) &&
+        Number.isInteger(currentLesson.currentIndex) &&
+        parseInt(index) - 1 !== currentLesson.currentIndex
+      ) {
+        setIndex(parseInt(index) - 1);
+      }
+    } else if (!!matchNoIndex) {
+      const { params } = matchNoIndex;
+      const { lessonID } = params ? params : {};
+
+      if (
+        !!lessonID &&
+        !!currentLessonValue &&
+        lessonID.toString() !== currentLessonValue.toString()
+      ) {
+        setLesson(lessonID);
+      }
     }
   });
 
