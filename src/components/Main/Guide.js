@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { createUseStyles } from "react-jss";
 import { ArrowLeft, ArrowRight } from "@material-ui/icons";
 
-import MdParser from "../utils/MdParser";
+import MdParser from "../../utils/MdParser";
 
 const useStyles = createUseStyles({
   container: {

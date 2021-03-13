@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useRouteMatch, Route } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 
 import Map from "./Map";
 import Sidebar from "./Sidebar";

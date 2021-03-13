@@ -2,9 +2,9 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createUseStyles } from "react-jss";
 
-import { getModalContent, getCardContent } from "../modules/selectors";
-import { LOADING, FAILED } from "../utils/constants";
-import { INCREMENT_INDEX, DECREMENT_INDEX } from "../modules/actions";
+import { getModalContent, getCardContent } from "../../modules/selectors";
+import { LOADING, FAILED } from "../../utils/constants";
+import { INCREMENT_INDEX, DECREMENT_INDEX } from "../../modules/actions";
 
 import Guide from "./Guide";
 import Modal from "./Modal";

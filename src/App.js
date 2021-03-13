@@ -4,8 +4,9 @@ import { createUseStyles } from "react-jss";
 
 import { store } from "./modules/store";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Main } from "./components/Main";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Main } from "./components/Main/Main";
+import { About } from "./components/About/About";
 
 const useStyles = createUseStyles({
   "@global": {
@@ -56,12 +57,15 @@ const useStyles = createUseStyles({
 });
 
 function App(props) {
+  // do not remove - responsible for global styling
   const classes = useStyles();
   return (
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path="/about">{/* <About /> */}</Route>
+          <Route path="/about">
+            <About />
+          </Route>
           <Route path="/">
             <Main />
           </Route>

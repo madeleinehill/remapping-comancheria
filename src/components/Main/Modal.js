@@ -1,20 +1,15 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
-import MdParser from "../utils/MdParser";
+import MdParser from "../../utils/MdParser";
+
 const useStyles = createUseStyles({
   contentCard: {
-    // position: "absolute",
-
-    position: "static",
+    position: "relative",
     minWidth: "50%",
     maxWidth: "800px",
 
-    display: "flex",
-    justifyContent: "center",
-
     backgroundColor: "#FFF",
     borderRadius: "10px",
-    padding: "15px",
     margin: "10px",
     boxShadow: "0 3px 14px rgba(0,0,0,0.4)",
     overflowY: "auto",
@@ -26,7 +21,7 @@ const useStyles = createUseStyles({
   },
   contentWrapper: {
     width: "80%",
-    margin: "15px",
+    margin: "30px auto",
   },
 });
 

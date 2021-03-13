@@ -4,6 +4,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 
 import { createUseStyles } from "react-jss";
 import SelectLesson from "./SelectLesson";
+import { Link } from "react-router-dom";
 
 const useStyles = createUseStyles((theme) => ({
   sidebar: {
@@ -52,6 +53,7 @@ const ConfiguredSidebar = (props) => {
       </SidebarContent>
       <SidebarFooter>
         <p style={{ float: "right", padding: "5px" }}>
+          <Link to="/about">About Remapping Comanchería</Link> <br />
           Created by Madeleine Hill, 2021
         </p>
       </SidebarFooter>

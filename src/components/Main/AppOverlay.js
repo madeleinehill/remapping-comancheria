@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createUseStyles } from "react-jss";
-import MdParser from "../utils/MdParser";
-import { SHOW_OVERLAY, HIDE_OVERLAY } from "../modules/actions";
+import MdParser from "../../utils/MdParser";
+import { SHOW_OVERLAY, HIDE_OVERLAY } from "../../modules/actions";
 
 const useStyles = createUseStyles({
   appOverlay: {

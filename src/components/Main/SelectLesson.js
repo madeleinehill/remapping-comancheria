@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { FETCH_LESSON, SET_INDEX } from "../modules/actions";
-import { SUCCESS } from "../utils/constants";
+import { FETCH_LESSON, SET_INDEX } from "../../modules/actions";
+import { SUCCESS } from "../../utils/constants";
 
 import { createUseStyles } from "react-jss";
 import { useRouteMatch } from "react-router";
