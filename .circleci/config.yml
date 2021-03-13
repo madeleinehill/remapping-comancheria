@@ -1,4 +1,8 @@
-version: 2
+version: 2.1
+
+orbs:
+  rsync: aplazame/rsync@0.0.17
+
 jobs:
   build:
     docker:
