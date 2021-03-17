@@ -97,10 +97,10 @@ const Splash = (props) => {
             ways. However, a continuing pattern of Indigenous peoples being
             erased from US national history compels me to put the imperative of
             intervention over the goal of perfection. If this website is your
-            first exposure to that kind of US history, please don't let it be
-            your last. Many of the authors I cite have a personal connection to
-            this history in a way that I simply do not, and are better equipped
-            to do it justice.
+            first exposure to the kind of history that includes Indigenous
+            peoples, please don't let it be your last. Many of the authors I
+            cite have a personal connection to this history in a way that I
+            simply do not, and are better equipped to do it justice.
           </p>
           <p>
             If you'd like to learn more about the project, click{" "}

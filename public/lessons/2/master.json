@@ -1,10 +1,393 @@
 {
-    "name": "2. The \"Frontier\"",
-    "content": [
-      {
-        "modal": {
-          "text": "In progress..."
-        }
+  "name": "2. The \"Frontier\"",
+  "content": [
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/1.md" }
       }
-    ]
-  }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/2.md" }
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "./lessons/2/3.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "features": [{ "src": "./resources/us-states/ga_state-1802.geojson" }]
+        }
+      ]
+    },
+    {
+      "card": {
+        "text": { "src": "./lessons/2/4.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "features": [{ "src": "./resources/us-states/ga_state-1783.geojson" }]
+        }
+      ],
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/46100/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/46100/{z}/{x}/{y}.png"
+        }
+      ]
+    },
+    {
+      "card": {
+        "text": { "src": "./lessons/2/5.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "features": [{ "src": "./resources/us-states/ga_state-1783.geojson" }]
+        },
+
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "label": "Cherokee"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=cherokee"
+          }
+        },
+
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "label": "Muscogee (Creek)"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=muscogee-creek"
+          }
+        },
+
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "label": "Seminole"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=seminole"
+          }
+        },
+
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "label": "Choctaw"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=chahta-choctaw"
+          }
+        },
+
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "label": "Chickasaw"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=chickasaw"
+          }
+        }
+      ],
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/46100/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/46100/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [32, -81],
+        "zoomLevel": 6
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/6.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/7.md" }
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "./lessons/2/8.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": { "color": "#FF0000" },
+          "features": [
+            { "src": "./resources/ceded-lands/7.geojson" },
+            { "src": "./resources/ceded-lands/44.geojson" },
+            { "src": "./resources/ceded-lands/92.geojson" },
+            { "src": "./resources/ceded-lands/60.geojson" },
+            { "src": "./resources/ceded-lands/75.geojson" },
+            { "src": "./resources/ceded-lands/172.geojson" },
+            { "src": "./resources/ceded-lands/131.geojson" },
+            { "src": "./resources/ceded-lands/141.geojson" },
+            { "src": "./resources/ceded-lands/116.geojson" },
+            { "src": "./resources/ceded-lands/93.geojson" }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": { "label": "Muscogee", "color": "#FF0000" },
+          "features": [{ "src": "./resources/ceded-lands/127.geojson" }]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": { "color": "#00FF00" },
+          "features": [
+            { "src": "./resources/ceded-lands/76.geojson" },
+            { "src": "./resources/ceded-lands/103.geojson" },
+            { "src": "./resources/ceded-lands/52.geojson" },
+            { "src": "./resources/ceded-lands/83.geojson" },
+            { "src": "./resources/ceded-lands/101.geojson" },
+            { "src": "./resources/ceded-lands/64.geojson" },
+            { "src": "./resources/ceded-lands/79.geojson" },
+            { "src": "./resources/ceded-lands/42.geojson" },
+            { "src": "./resources/ceded-lands/8.geojson" },
+            { "src": "./resources/ceded-lands/57.geojson" },
+            { "src": "./resources/ceded-lands/3.geojson" },
+            { "src": "./resources/ceded-lands/42.geojson" },
+            { "src": "./resources/ceded-lands/102.geojson" },
+            { "src": "./resources/ceded-lands/84.geojson" },
+            { "src": "./resources/ceded-lands/85.geojson" }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": { "label": "Cherokee", "color": "#00FF00" },
+          "features": [{ "src": "./resources/ceded-lands/203.geojson" }]
+        },
+        { "src": "./resources/ga_diff-1776.geojson" }
+      ],
+
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/46100/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/46100/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [32, -81],
+        "zoomLevel": 6
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "./lessons/2/9.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": { "color": "#00FF00" },
+          "features": [{ "src": "./resources/ceded-lands/203.geojson" }]
+        },
+        { "src": "./resources/ga_diff-1776.geojson" }
+      ],
+      "popups": [
+        {
+          "position": [34.5, -84.9],
+          "text": { "src": "./lessons/2/New_Echota.md" }
+        }
+      ],
+
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/46100/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/46100/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [34.5, -84.9],
+        "zoomLevel": 7
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/10.md" }
+      },
+
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/46100/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/46100/{z}/{x}/{y}.png"
+        }
+      ]
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/11.md" }
+      },
+
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/46100/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/46100/{z}/{x}/{y}.png"
+        }
+      ]
+    },
+    {
+      "card": {
+        "text": { "src": "./lessons/2/12.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": { "color": "#FF0000" },
+          "features": [
+            { "src": "./resources/ceded-lands/7.geojson" },
+            { "src": "./resources/ceded-lands/44.geojson" },
+            { "src": "./resources/ceded-lands/92.geojson" },
+            { "src": "./resources/ceded-lands/60.geojson" },
+            { "src": "./resources/ceded-lands/75.geojson" },
+            { "src": "./resources/ceded-lands/172.geojson" },
+            { "src": "./resources/ceded-lands/131.geojson" },
+            { "src": "./resources/ceded-lands/141.geojson" },
+            { "src": "./resources/ceded-lands/116.geojson" },
+            { "src": "./resources/ceded-lands/93.geojson" }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": { "label": "Muscogee", "color": "#FF0000" },
+          "features": [{ "src": "./resources/ceded-lands/127.geojson" }]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": { "color": "#00FF00" },
+          "features": [
+            { "src": "./resources/ceded-lands/76.geojson" },
+            { "src": "./resources/ceded-lands/103.geojson" },
+            { "src": "./resources/ceded-lands/52.geojson" },
+            { "src": "./resources/ceded-lands/83.geojson" },
+            { "src": "./resources/ceded-lands/101.geojson" },
+            { "src": "./resources/ceded-lands/64.geojson" },
+            { "src": "./resources/ceded-lands/79.geojson" },
+            { "src": "./resources/ceded-lands/42.geojson" },
+            { "src": "./resources/ceded-lands/8.geojson" },
+            { "src": "./resources/ceded-lands/57.geojson" },
+            { "src": "./resources/ceded-lands/3.geojson" },
+            { "src": "./resources/ceded-lands/42.geojson" },
+            { "src": "./resources/ceded-lands/102.geojson" },
+            { "src": "./resources/ceded-lands/84.geojson" },
+            { "src": "./resources/ceded-lands/85.geojson" }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": { "label": "Cherokee", "color": "#00FF00" },
+          "features": [{ "src": "./resources/ceded-lands/203.geojson" }]
+        },
+        { "src": "./resources/ga_diff-1776.geojson" }
+      ],
+
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/46100/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/46100/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [32, -81],
+        "zoomLevel": 6
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "./lessons/2/13.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "label": "Black Prairie lands",
+            "color": "#000000",
+            "blurIntensity": "10"
+          },
+          "features": [{ "src": "./resources/black_prairie.geojson" }]
+        }
+      ],
+
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/46100/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/46100/{z}/{x}/{y}.png"
+        }
+      ]
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/14.md" }
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "./lessons/2/15.md" }
+      },
+
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/55484/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/55484/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [32, -81],
+        "zoomLevel": 6
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/16.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/17.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/18.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/19.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/20.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/2/21.md" }
+      }
+    }
+  ]
+}

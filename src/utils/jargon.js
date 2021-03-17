@@ -22,6 +22,22 @@ const jargon = {
     "A state of dominance of one group over others in which there is a severe asymmetry in the distribution of power or influence.",
   postcontact:
     "Referring to the time after which Europeans had engaged with a given place or group. Such contact occured at different points for different groups.",
+  frontierthesis:
+    "The existence of an area of free land, its continuous recession, and the advance of American settlement westward, explain American development.",
+  myth1:
+    "Indigenous peoples’ societies and cultures are singular, timeless, and “uncivilized”",
+  myth2:
+    "The decline of Indigenous populations was spontaneous, inevitable, or merely tangential to the history of the United States",
+  myth3:
+    "The United States was destined to expand across North America, independent of the Indigenous civilizations they replaced (manifest destiny)",
+  myth4:
+    "The process of settling this supposedly free, uncivilized land is sufficient to explain the course of American development (the Turnerian frontier)",
+  myth5:
+    "Studying Indigenous peoples is unnecessary for understanding the history of the United States",
+  fivemyths:
+    "1. Indigenous peoples’ societies and cultures were singular, timeless, and “uncivilized” \n 1. The decline of Indigenous populations was spontaneous, inevitable, or merely tangential to the history of the United States \n 1. The United States was destined to expand across North America, independent of the Indigenous civilizations they replaced (manifest destiny) \n 1. The process of settling this supposedly free, uncivilized land is sufficient to explain the course of American development (the Turnerian frontier) \n 1. And, therefore, studying Indigenous peoples is unnecessary for understanding the history of the United States.",
+  historiography:
+    "The study of the history. In other words, history about history - how people have written and thought about history differently through time.",
 };
 
 export default jargon;

@@ -235,9 +235,15 @@ export const About = (props) => {
                 inherently imprecise entities like the Ohio country in the 18th
                 century, but also for entities where we (meaning I) lack the
                 data or knowledge to precisely replicate borders which at one
-                time existed. You can find that project
-                [here](https://github.com/madeleinehill/leaflet-fuzzy) if you
-                are interested.
+                time existed. You can find that project{" "}
+                <a
+                  href="https://github.com/madeleinehill/leaflet-fuzzy"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  here
+                </a>{" "}
+                if you are interested.
               </p>
             </li>
             <li>
