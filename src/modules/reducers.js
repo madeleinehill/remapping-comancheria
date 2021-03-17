@@ -16,6 +16,7 @@ import {
   SHOW_OVERLAY,
   SET_INDEX,
   SET_SLIDE_DEPENDENCIES,
+  SLIDE_RESOURCES_FAILED,
 } from "./actions";
 import { SUCCESS, FAILED, NOT_LOADED, LOADING } from "../utils/constants";
 
@@ -123,6 +124,21 @@ const reducer = (state = defaultState, action) => {
               ...state.currentLesson.content[action.value.slide],
               dependencies: action.value.dependencies,
               loadingStatus: SUCCESS,
+            },
+          },
+        },
+      };
+    case SLIDE_RESOURCES_FAILED:
+      return {
+        ...state,
+        currentLesson: {
+          ...state.currentLesson,
+          content: {
+            ...state.currentLesson.content,
+            [action.value.slide]: {
+              ...state.currentLesson.content[action.value.slide],
+              dependencies: [],
+              loadingStatus: FAILED,
             },
           },
         },

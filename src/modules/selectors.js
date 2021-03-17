@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { SUCCESS } from "../utils/constants";
+import { FAILED, LOADING, SUCCESS } from "../utils/constants";
 
 const getCurrentLesson = (state) => state.currentLesson;
 const getResources = (state) => state.resources;
@@ -30,8 +30,21 @@ export const getCardContent = createSelector(
     const currentContent = content[currentIndex];
 
     if (
+      !!currentContent &&
+      !!currentContent.dependencies &&
+      (currentContent.loadingStatus === FAILED ||
+        dependenciesFailed(currentContent, resources))
+    ) {
+      return {
+        text:
+          "## Error \n There was a problem loading the slide resources. Try reloading the slide.",
+      };
+    }
+
+    if (
       !currentContent ||
-      currentContent.loadingStatus !== SUCCESS ||
+      !currentContent.dependencies ||
+      currentContent.loadingStatus === LOADING ||
       !dependenciesLoaded(currentContent, resources)
     ) {
       return { text: "## Loading slide..." };
@@ -96,6 +109,12 @@ function resolveResources(el, resources) {
   } else {
     return el;
   }
+}
+
+function dependenciesFailed(currentContent, resources) {
+  return currentContent.dependencies.some(
+    (d) => !!resources[d] && resources[d].loadingStatus === FAILED,
+  );
 }
 
 function dependenciesLoaded(currentContent, resources) {

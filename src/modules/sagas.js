@@ -156,6 +156,11 @@ function* fetchResource(action) {
       },
     });
   } catch (e) {
-    yield put({ type: FETCH_RESOURCE_FAILED, message: e.message });
+    console.log("ERROR CAUGHT");
+    yield put({
+      type: FETCH_RESOURCE_FAILED,
+      value: { src },
+      message: e.message,
+    });
   }
 }
