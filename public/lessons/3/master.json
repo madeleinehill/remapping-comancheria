@@ -1,11 +1,472 @@
 {
-    "name": "3. Los Comanches",
-    "content": [
-      {
-        "modal": 
-          {
-            "src":"/lessons/3/0.md"
-          }
+  "name": "3. Los Comanches",
+  "content": [
+    {
+      "card": {
+        "text": { "src": "/lessons/3/1.md" }
+      },
+      "popups": [
+        {
+          "position": [34.5, -105.9],
+          "text": { "src": "/lessons/3/1popup.md" }
+        }
+      ],
+      "zoomTo": {
+        "center": [34.5, -105.9],
+        "zoomLevel": 6
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ]
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/2.md" }
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [32.5, -97.9],
+        "zoomLevel": 6
       }
-    ]
-  }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/3.md" }
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ],
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        }
+      ],
+      "zoomTo": {
+        "center": [32.5, -97.9],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/4.md" }
+      },
+      "popups": [
+        {
+          "position": [30.4, -96.1],
+          "text": { "src": "/lessons/3/lasalle.md" }
+        }
+      ],
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [30.4, -96.1],
+        "zoomLevel": 7
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/5.md" }
+      },
+      "popups": [
+        {
+          "position": [36.4, -105.6],
+          "text": { "src": "/lessons/3/loscomanches.md" }
+        }
+      ],
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [36.4, -105.6],
+        "zoomLevel": 7
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/6.md" }
+      },
+      "popups": [
+        {
+          "position": [34.7, -106.7],
+          "text": { "src": "/lessons/3/tome.md" }
+        }
+      ],
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [34.7, -106.7],
+        "zoomLevel": 7
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/7.md" }
+      },
+      "geojson": [{ "src": "/lessons/3/txnm_1825.geojson" }],
+      "zoomTo": {
+        "center": [33, -97],
+        "zoomLevel": 6
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/8.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        },
+        { "src": "/lessons/3/txnm_1825.geojson" }
+      ]
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/9.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        },
+        { "src": "/lessons/3/txnm_1825.geojson" }
+      ]
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/10.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        },
+        { "src": "/lessons/3/txnm_1825.geojson" }
+      ],
+      "popups": [
+        {
+          "position": [36.4, -105.6],
+          "text": { "src": "/lessons/3/taos.md" }
+        }
+      ]
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/3/11.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/3/12.md" }
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/13.md" }
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ],
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        }
+      ],
+      "zoomTo": {
+        "center": [32.5, -97.9],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/14.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "label": "Indian Territory"
+          },
+          "features": [
+            {
+              "src": "/resources/us-states/it_indianterr-1824.geojson"
+            }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 60,
+            "label": "Osage"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=osage"
+          }
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 30,
+            "label": "Pawnee"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=pawnee"
+          }
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 30,
+            "label": "Wichita"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=wichita"
+          }
+        }
+      ],
+      "zoomTo": {
+        "center": [35, -95],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/15.md" }
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ],
+      "popups": [
+        {
+          "position": [36, -95],
+          "text": { "src": "/lessons/3/texans.md" },
+          "icon": "arrow_sw"
+        }
+      ],
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        },
+        { "src": "/lessons/3/txnm_1825.geojson" }
+      ],
+      "zoomTo": {
+        "center": [34, -95],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/16.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "label": "Indian Territory"
+          },
+          "features": [
+            {
+              "src": "/resources/us-states/it_indianterr-1824.geojson"
+            }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 60,
+            "label": "Osage"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=osage"
+          }
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 30,
+            "label": "Pawnee"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=pawnee"
+          }
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 30,
+            "label": "Wichita"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=wichita"
+          }
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        }
+      ],
+      "zoomTo": {
+        "center": [36, -95],
+        "zoomLevel": 6
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/3/17.md" }
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/3/18.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        },
+        { "src": "/lessons/3/txnm_1825.geojson" }
+      ],
+      "popups": [
+        {
+          "position": [29, -102],
+          "text": { "src": "/lessons/3/haunted.md" },
+          "icon": "arrow_s"
+        }
+      ],
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [32.5, -97.9],
+        "zoomLevel": 6
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/3/19.md" }
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ]
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/3/20.md" }
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ]
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/3/21.md" }
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
+        }
+      ]
+    }
+  ]
+}

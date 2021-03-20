@@ -1,60 +1,439 @@
 {
-    "name": "4. Remapping",
-    "content": [
-      {
-        "card": {
-          "src": "/lessons/4/1.md"
-        }
+  "name": "4. Remapping",
+  "content": [
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/1.md" }
       },
-      {
-        "card": {
-          "src": "/lessons/4/2.md"
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
         }
+      ]
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/2.md" }
       },
-      {
-        "card": {
-          "src": "/lessons/4/3.md"
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
         }
+      ]
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/3.md" }
       },
-      {
-        "card": {
-          "src": "/lessons/4/4.md"
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
         }
+      ]
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/4.md" }
       },
-      {
-        "card": {
-          "src": "/lessons/4/5.md"
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
         }
+      ]
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/5.md" }
       },
-      {
-        "card": {
-          "src": "/lessons/4/6.md"
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
         }
+      ]
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/4/6.md" }
       },
-      {
-        "card": {
-          "src": "/lessons/4/7.md"
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/43477/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/43477/{z}/{x}/{y}.png"
         }
-      },
-      {
-        "card": {
-          "src": "/lessons/4/8.md"
-        }
-      },
-      {
-        "card": {
-          "src": "/lessons/4/9.md"
-        }
-      },
-      {
-        "card": {
-          "src": "/lessons/4/10.md"
-        }
-      },
-      {
-        "card": {
-          "src": "/lessons/4/1.md"
-        }
+      ],
+      "zoomTo": {
+        "center": [34, -97.9],
+        "zoomLevel": 5
       }
-    ]
-  }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/4/7.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        }
+      ],
+      "zoomTo": {
+        "center": [34, -97.9],
+        "zoomLevel": 6
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/4/8.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 60,
+            "label": "Buffalo range, c. 1830"
+          },
+          "features": [
+            {
+              "src": "/lessons/4/buffalo_land.geojson"
+            }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        }
+      ],
+      "popups": [
+        {
+          "position": [40, -102],
+          "text": { "src": "/lessons/4/buffalo.md" }
+        }
+      ],
+      "zoomTo": {
+        "center": [34, -97.9],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/4/9.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 60,
+            "label": "Buffalo range, c. 1830"
+          },
+          "features": [
+            {
+              "src": "/lessons/4/buffalo_land.geojson"
+            }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Lipan Apaches"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=lipan-apache"
+          }
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Chiricahua Apaches"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=chiricahua-apache"
+          }
+        }
+      ],
+      "zoomTo": {
+        "center": [34, -97.9],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/4/10.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 60,
+            "label": "Buffalo range, c. 1830"
+          },
+          "features": [
+            {
+              "src": "/lessons/4/buffalo_land.geojson"
+            }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        },
+        { "src": "/lessons/3/txnm_1825.geojson" }
+      ],
+      "popups": [
+        {
+          "position": [40, -100],
+          "text": "Comanches traded with peoples to their North such as Pawnees, Cheyennes and Arapahos, who served as an intermediate to groups in the Missouri area. These groups often had direct access to US guns, which could ultimately flow all the way to the Southwest.",
+          "icon": "arrow_n"
+        },
+        {
+          "position": [39, -105],
+          "text": "Comanches traded with Shoshones to the northwest. Cut off from the British fur trade by Indigenous migrations Shoshones relied on Comanches for guns, acquired from the Missouri peoples and in raids. In exchange they offered horses.",
+          "icon": "arrow_nw"
+        },
+        {
+          "position": [35, -104],
+          "text": "Trade in Taos kept New Mexicans dependent on Comanches, while fueling their raiding economy and providing a market for stolen horses and mules. Goods like tobacco, blankets, and knives gave New Mexicans access to goods from the far corners of the Comanches' trade network, while opening up opportunities for smuggling and dodging taxes.",
+          "icon": "arrow_w"
+        }
+      ],
+      "zoomTo": {
+        "center": [34, -97.9],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/4/11.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 10,
+            "color": "#AA0000"
+          },
+          "features": [
+            {
+              "src": "/lessons/4/raiding-1820.geojson"
+            }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "color": "#AA0000"
+          },
+          "features": [
+            {
+              "src": "/lessons/4/raiding-1830.geojson"
+            }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 40,
+            "color": "#AA0000"
+          },
+          "features": [
+            {
+              "src": "/lessons/4/raiding-1840.geojson"
+            }
+          ]
+        }
+      ],
+      "zoomTo": {
+        "center": [30, -97.9],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/4/12.md" }
+      },
+      "geojson": [
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 60,
+            "label": "Buffalo range, c. 1830"
+          },
+          "features": [
+            {
+              "src": "/lessons/4/buffalo_land.geojson"
+            }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "label": "Comanchería"
+          },
+          "features": {
+            "src": "https://native-land.ca/api/index.php?maps=territories&name=nmn-comanche"
+          }
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 10,
+            "color": "#AA0000"
+          },
+          "features": [
+            {
+              "src": "/lessons/4/raiding-1820.geojson"
+            }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 20,
+            "color": "#AA0000"
+          },
+          "features": [
+            {
+              "src": "/lessons/4/raiding-1830.geojson"
+            }
+          ]
+        },
+        {
+          "type": "FeatureCollection",
+          "properties": {
+            "blurIntensity": 40,
+            "color": "#AA0000"
+          },
+          "features": [
+            {
+              "src": "/lessons/4/raiding-1840.geojson"
+            }
+          ]
+        }
+      ],
+      "popups": [
+        {
+          "position": [40, -100],
+          "text": "Comanches traded with peoples to their North such as Pawnees, Cheyennes and Arapahos, who served as an intermediate to groups in the Missouri area. These groups often had direct access to US guns, which could ultimately flow all the way to the Southwest.",
+          "icon": "arrow_n"
+        },
+        {
+          "position": [39, -105],
+          "text": "Comanches traded with Shoshones to the northwest. Cut off from the British fur trade by Indigenous migrations Shoshones relied on Comanches for guns, acquired from the Missouri peoples and in raids. In exchange they offered horses.",
+          "icon": "arrow_nw"
+        },
+        {
+          "position": [35, -104],
+          "text": "Trade in Taos kept New Mexicans dependent on Comanches, while fueling their raiding economy and providing a market for stolen horses and mules. Goods like tobacco, blankets, and knives gave New Mexicans access to goods from the far corners of the Comanches' trade network, while opening up opportunities for smuggling and dodging taxes.",
+          "icon": "arrow_w"
+        }
+      ],
+      "zoomTo": {
+        "center": [34, -97.9],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/13.md" }
+      }
+    },
+    {
+      "card": {
+        "text": { "src": "/lessons/4/14.md" }
+      },
+      "overlays": [
+        {
+          "attributionUrl": "https://mapwarper.net/maps/39813/",
+          "attributionText": "MapWarper",
+          "tilesUrl": "https://mapwarper.net/maps/tile/39813/{z}/{x}/{y}.png"
+        }
+      ],
+      "zoomTo": {
+        "center": [36, -97.9],
+        "zoomLevel": 5
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/15.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/16.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/17.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/18.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/19.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "/lessons/4/20.md" }
+      }
+    }
+  ]
+}

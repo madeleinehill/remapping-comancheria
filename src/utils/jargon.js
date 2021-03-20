@@ -38,6 +38,20 @@ const jargon = {
     "1. Indigenous peoples’ societies and cultures were singular, timeless, and “uncivilized” \n 1. The decline of Indigenous populations was spontaneous, inevitable, or merely tangential to the history of the United States \n 1. The United States was destined to expand across North America, independent of the Indigenous civilizations they replaced (manifest destiny) \n 1. The process of settling this supposedly free, uncivilized land is sufficient to explain the course of American development (the Turnerian frontier) \n 1. And, therefore, studying Indigenous peoples is unnecessary for understanding the history of the United States.",
   historiography:
     "The study of the history. In other words, history about history - how people have written and thought about history differently through time.",
+  pueblos:
+    "Pueblos were small fixed communities populated by sedentary Indigenous people whom the Spanish had directly governed since the 1500s (Reséndez, 2004; 44)",
+  nomadic:
+    "Living a mobile lifestyle, without a single established home. Sometimes involves seasonal migration in pursuit of game or on military campaign.",
+  nationstate:
+    "A sovereign state which also claims a single, unified national identity, often as a basis for the legitimacy of its government.",
+  nationstates:
+    "A sovereign state which also claims a single, unified national identity, often as a basis for the legitimacy of its government.",
+  sedentary:
+    "Not nomadic, but rather, living in one place. Often associated with the primarily agricultural societies, who have no need to move throughout the year.",
+  materialNeeds:
+    "Material needs are the basic resources by which people live. For example, buffalo served as food and clothing, and provided many raw materials for other goods to Comanches.",
+  fivecs:
+    "1. Change over time \n 1. Context \n 1. Causality \n 1. Contingency \n 1. Complexity",
 };
 
 export default jargon;
