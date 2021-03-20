@@ -51,7 +51,7 @@ export const About = (props) => {
           <h1>About</h1>
           <p>
             Remapping Comanchería is a web application I have developed for use
-            in the classroom as a multimedia tool for teaching the history of
+            in the classroom as an interactive tool for teaching the history of
             the American Southwest and historical thinking skills, formulated as
             a direct response to the treatment of Indigenous peoples in the
             College Board’s Advanced Placement United States History (APUSH)
@@ -75,13 +75,24 @@ export const About = (props) => {
             <a href="#1">How do I propose changes?</a>
           </p>
           <p>
-            <a href="#2">How does Remapping Comanchería fit in with APUSH?</a>
+            <a href="#2">Should I read through all at once?</a>
           </p>
           <p>
-            <a href="#3">How was Remapping Comanchería developed?</a>
+            <a href="#3">Where should I start?</a>
           </p>
           <p>
-            <a href="#4">Where can I read more?</a>
+            <a href="#4">How does Remapping Comanchería fit in with APUSH?</a>
+          </p>
+          <p>
+            <a href="#5">How was Remapping Comanchería developed?</a>
+          </p>
+          <p>
+            <a href="#6">
+              How does Remapping Comanchería center Indigenous voices?
+            </a>
+          </p>
+          <p>
+            <a href="#7">Where can I read more?</a>
           </p>
 
           <ul>
@@ -93,6 +104,8 @@ export const About = (props) => {
                 developed with collaboration in mind. If you have specific edits
                 in mind, you can propose these all from within the Github web
                 interface, using the following instructions.
+                <br />
+                <br />
                 <ol>
                   <li>
                     Navigate to the{" "}
@@ -111,9 +124,10 @@ export const About = (props) => {
                     be in /public/lessons.
                   </li>
                   <li>
-                    1. When you can see the text you wish to edit, click the
-                    pencil icon in the top right. This will create a fork that
-                    will hold your changes until you make a pull request.
+                    When you can see the text you wish to edit, click the pencil
+                    icon in the top right. This will create a "fork" - a
+                    temporary version of the code that will hold your changes
+                    until they can be incorporated into the main application.
                   </li>
                   <li>
                     When you are done editing, save your changes and create a
@@ -131,18 +145,74 @@ export const About = (props) => {
                 </ol>{" "}
               </p>
             </li>
-            <li>
-              <a name="2"></a>
-              <h2>How does Remapping Comanchería fit in with APUSH?</h2>
 
+            <li>
+              <a name="2" target="_self"></a>
+              <h2>Should I read through all at once?</h2>
               <p>
-                At a basic level, Remapping Comanchería reinforces a general
-                factual understanding of US expansionism, and developing
-                facility with the Five Cs of historical analysis. Moreover, by
-                being exposed to challenges to the APUSH framework and academic
-                standards, students become more familiar with those very
-                standards, and are more likely to engage with them deeply and
-                critically.
+                No! Remapping Comanchería is long - each section is estimated to
+                require at least 30 minutes of engagement time if you are
+                critically reading through the content. Science shows us that we
+                learn best when we spread out our learning over time - even if
+                it's just going for a walk in between lessons (though preferably
+                you can engage over a number of days), spacing out the lessons
+                will give you more time to internalize the content and skills,
+                improving retention and increasing the value you get from
+                practicing historical thinking.
+              </p>
+            </li>
+            <li>
+              <a name="3" target="_self"></a>
+              <h2>Where should I start?</h2>
+              <p>
+                With the Introduction! Though each lesson and slide can be
+                linked and accessed independently, the lessons build on each
+                other. Without the context of previous sections, you're likely
+                to be unfamiliar with facts and concepts introduced in previous
+                sections, which are regularly referenced as points for
+                comparison and argument. Reading sequentially will allow you to
+                take full advantage of the learning progression embedded in
+                Remapping Comanchería and will improve your overall experience.
+              </p>
+            </li>
+            <li>
+              <a name="4"></a>
+              <h2>How does Remapping Comanchería fit in with APUSH?</h2>
+              <p>
+                The APUSH framework is built around two essential components:
+                historical thinking skills, and course content. Remapping
+                Comanchería is specifically developed to teach and reinforce the
+                kind of critical thinking skills necessary to be successful on
+                the AP Exam. Some of these skills come directly from the
+                framework, such as causation, change over time,
+                contextualization, and working with arguments. Others provide a
+                complementary set of skills which are nonetheless central to
+                critical reasoning about US history.
+              </p>
+              <p>
+                In order to teach these skills, students will be asked to
+                respond to engagement prompts. If you are in a classroom setting
+                and have the opportunity, this is an excellent opportunity to
+                discuss these questions to better understand and practice the
+                reasoning processes at play.
+              </p>
+              <p>
+                Remapping Comanchería reinforces a general factual understanding
+                of US expansionism. Naturally, the history has a significant
+                amount of overlap with APUSH course content, but it also deepens
+                students' engagement with this content by reframing it in
+                unfamiliar ways. Students will, for example, gain an enhanced
+                understanding of Indian Removal policies, the expansion of
+                slavery in the south, and the historical context which prompted
+                the Mexican-American War and Civil War.
+              </p>
+              <p>
+                Students will also be exposed to a number of primary and
+                secondary sources, learning not only how historical peoples
+                thought of themselves, but also how historians have conceived of
+                them since. Working with these sources will provide an
+                opportunity to exercise historical thinking skills, as well as
+                practice engaging with the evidence and argument.
               </p>
               <p>
                 In addition to this, Remapping Comanchería deliberately targets
@@ -160,7 +230,8 @@ export const About = (props) => {
                 By examining the historical realities of settlement on the
                 American frontier, section 2, The Frontier, considers how
                 migration of Mexicans, Anglo-Americans and Indigenous peoples
-                alike defined much of the 19th century in North America.
+                alike would come to define much of the 19th century in North
+                America.
               </p>
               <p style={{ margin: "15px 50px" }}>
                 <em>American and National Identity</em>
@@ -175,7 +246,7 @@ export const About = (props) => {
               <p>
                 Arguably, nowhere is the concept of American identity more
                 thoroughly tested and challenged than in the Southwest
-                borderlands. By examining how American identity was conceived of
+                borderlands. By examining how national identity was conceived of
                 on the frontier in historical times, as well as how the frontier
                 myth has continued to shape American identity into the present,
                 section 3, Los Comanches, explores how identity can be nuanced
@@ -192,17 +263,15 @@ export const About = (props) => {
               </p>
               <p>
                 Geography and ecology in the Southwest and Plains help explain
-                much of the _Comanches_’ power, but also guided long term
+                much of the Comanches’ power, but also guided long term
                 processes that guided US expansion more broadly. In section 4,
                 Remapping, we explore how the geography of North America
                 consistently defined the course of history for both Indigenous
-                peoples and Anglo-Americans, from the Comanches' adoption of a
-                plains lifestyle to advocates of removal who sought the fertile
-                soil of Mississippi and Alabama.
+                peoples and Anglo-Americans.
               </p>
             </li>
             <li>
-              <a name="3"></a>
+              <a name="5"></a>
               <h2>How was Remapping Comanchería developed?</h2>
               <p>
                 I wrote much of the code for the application myself, as I found
@@ -245,16 +314,83 @@ export const About = (props) => {
                 </a>{" "}
                 if you are interested.
               </p>
+              <p>
+                I used a number of tools to create and secure geographical
+                resources for the project. The translucent historical map
+                overlays come from the excellent{" "}
+                <a
+                  href="https://mapwarper.net/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Map Warper
+                </a>
+                , which allows users to upload and georeference their own image
+                files and providing hosting for map tiles. Much of the
+                Indigenous geographical data comes directly from{" "}
+                <a
+                  href="https://native-land.ca/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Native Land
+                </a>
+                , a Canadian not-for-profit organization which seeks to better
+                represent Indigenous peoples' place in history. Finally, I
+                created some resources for myself based on other maps or textual
+                sources using{" "}
+                <a href="https://geojson.io/" target="_blank" rel="noreferrer">
+                  geojson.io
+                </a>
+                . Because leaflet-fuzzy offers support for most geojson shapes,
+                data created here can be directly imported into the application.
+              </p>
             </li>
             <li>
-              <a name="4"></a>
+              <a name="6"></a>
+              <h2>How does Remapping Comanchería center Indigenous voices?</h2>
+              <p>
+                In addition to engaging with the works of several Indigenous
+                authors and projects throughout the development process, I
+                worked to foreground the ideas produced by Indigenous
+                individuals and organizations. For example, the Five Myths are
+                based directly on the National Museum of the American Indian's{" "}
+                <a
+                  href="https://americanindian.si.edu/nk360/about/understandings"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  essential understandings
+                </a>
+                . While they have been modified to better suit the purposes and
+                audience of Remapping Comanchería, this allows for the direct
+                use of Indigenous knowledge, targeting concepts which Indigenous
+                people themselves have identified and articulated
+              </p>
+              <p>
+                The use of data from{" "}
+                <a
+                  href="https://native-land.ca/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Native Land
+                </a>{" "}
+                serves a similar purpose, allowing for Indigenous peoples to
+                represent their history, geographically, on their own terms. By
+                incorpating these forms of Indigenous knowledge directly into my
+                application, I have worked to ground my work in the lived
+                experience of those groups.
+              </p>
+            </li>
+            <li>
+              <a name="7"></a>
               <h2>Where can I read more?</h2>
               <p>
                 I have included a comprehensive list of references for each
                 section, citing the works that I used to create the project. I
-                also provide dedicated sections for further reading which are
-                more similar to the project in scope, topic, or audience, but
-                which I did not necessarily use myself.
+                also provide dedicated slides for further reading which are more
+                similar to the project in scope, topic, or audience.
               </p>
             </li>
           </ul>
