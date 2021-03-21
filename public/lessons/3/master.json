@@ -159,6 +159,12 @@
           }
         },
         { "src": "/lessons/3/txnm_1825.geojson" }
+      ],
+      "popups": [
+        {
+          "position": [36.4, -100],
+          "text": { "src": "/lessons/3/borders.md" }
+        }
       ]
     },
     {

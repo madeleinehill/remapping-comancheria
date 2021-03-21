@@ -378,8 +378,8 @@ export const About = (props) => {
                 </a>{" "}
                 serves a similar purpose, allowing for Indigenous peoples to
                 represent their history, geographically, on their own terms. By
-                incorpating these forms of Indigenous knowledge directly into my
-                application, I have worked to ground my work in the lived
+                incorporating these forms of Indigenous knowledge directly into
+                my application, I have worked to ground my work in the lived
                 experience of those groups.
               </p>
             </li>

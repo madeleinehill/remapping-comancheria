@@ -306,6 +306,16 @@
           }
         }
       ]
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/1/14.md" }
+      }
+    },
+    {
+      "modal": {
+        "text": { "src": "./lessons/1/15.md" }
+      }
     }
   ]
 }

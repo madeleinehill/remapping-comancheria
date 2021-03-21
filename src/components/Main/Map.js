@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Popup,
-  Marker,
-  // Polygon,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
 import { useSelector } from "react-redux";
 import { createUseStyles } from "react-jss";
 
@@ -160,13 +154,6 @@ const MapWrapper = (props) => {
             key={o.tilesUrl}
           />
         }
-        {/* {polygons.map((p, i) => (
-          <FuzzyPolygon
-            key={i}
-            positions={p.positions}
-            color={p.color ? p.color : "red"}
-          ></FuzzyPolygon>
-        ))} */}
         {geojson.map(
           (f, i) => f && <FuzzyLayer data={f} key={`gj${i}`}></FuzzyLayer>,
         )}
